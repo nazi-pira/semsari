@@ -1,41 +1,47 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Route, Router, Switch } from 'react-router';
-import './App.css';
+import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import Container from '@material-ui/core/Container'
 
-import LoginPage from './pages/LoginPage'
-import SignUpPage from './pages/SignUpPage'
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignupPage";
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
-function App() {
+import theme from './theme';
+
+const useStyles = makeStyles((th) => ({
+  root: {
+    height: '100%',
+    marginTop: th.spacing(0),
+    padding: th.spacing(6, 6)
+  }
+}));
+
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header" />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
-        <BrowserRouter>
-          <Navbar />
+        <Navbar />
 
+        <Container className={classes.root}>
           <Switch>
-            <Route path="/" exact>
-              <div> main page </div>
-            </Route>
-
-            <Route path="/login">
-              <LoginPage />
-            </Route>
-
-            <Route path="/signup">
-              <SignUpPage />
-            </Route>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/login" component={LoginPage} />
           </Switch>
-          <Footer />
-        </BrowserRouter>
+        </Container>
+
+        <Footer />
       </Router>
-    </div>
+    </ThemeProvider>
   );
 }
-
-export default App;
