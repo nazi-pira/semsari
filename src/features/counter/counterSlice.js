@@ -45,8 +45,10 @@ export const counterSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(incrementAsync.pending, (state) => {
+        // eslint-disable-next-line no-param-reassign
         state.status = 'loading';
       })
+
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.value += action.payload;
