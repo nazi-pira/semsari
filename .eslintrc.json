@@ -1,6 +1,8 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb"],
+  "extends": [
+    "airbnb"
+  ],
   "globals": {
     "document": true,
     "window": true,
@@ -8,7 +10,8 @@
   },
   "env": {
     "node": true,
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "parserOptions": {
     "sourceType": "module",
@@ -19,8 +22,24 @@
       "modules": true
     }
   },
-  "plugins": ["react-hooks"],
+  "plugins": [
+    "react-hooks",
+    "testing-library"
+  ],
   "rules": {
+    "quotes": "warn",
+    "jsx-a11y/label-has-associated-control": [ 2, {
+      "labelComponents": ["label"],
+      "labelAttributes": ["htmlFor"],
+      "controlComponents": ["input"]
+    }],
+    "jsx-a11y/label-has-for": [ 2, {
+      "components": [ "Label" ],
+      "required": {
+          "some": ["id", "nesting"]
+      },
+      "allowChildren": false
+    }],
     "arrow-body-style": "off",
     "class-methods-use-this": "off",
     "brace-style": [
@@ -30,8 +49,10 @@
         "allowSingleLine": true
       }
     ],
-    "implicit-arrow-linebreak": "off",
-    "comma-dangle": ["off", "never"],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
     "consistent-return": "off",
     "curly": "error",
     "eol-last": "off",
@@ -47,25 +68,22 @@
       }
     ],
     "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/label-has-for": "off",
     "jsx-a11y/href-no-hash": "off",
-    "no-alert": "off",
-    "no-console": "off",
-    "no-debugger": "off",
+    "no-alert": "error",
+    "no-console": "error",
+    "no-debugger": "error",
     "no-else-return": "off",
-    "no-irregular-whitespace": "warn",
+    "no-irregular-whitespace": "error",
     "no-multiple-empty-lines": [
-      "warn",
+      "error",
       {
         "max": 1
       }
     ],
     "no-param-reassign": "off",
-    "function-paren-newline": "off",
-    "disable-next-line": "off",
     "no-restricted-syntax": "off",
     "object-curly-newline": [
-      "warn",
+      "error",
       {
         "ObjectExpression": {
           "consistent": true
@@ -98,7 +116,7 @@
     "react/jsx-wrap-multilines": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/no-array-index-key": "off",
+    "react/no-array-index-key": "error",
     "react/no-danger": "off",
     "react/no-did-mount-set-state": "error",
     "react/no-did-update-set-state": "error",
@@ -117,5 +135,12 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "semi": "off"
-  }
+  },
+  "overrides": [
+    {
+      // 3) Now we enable eslint-plugin-testing-library rules or preset only for matching files!
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }
