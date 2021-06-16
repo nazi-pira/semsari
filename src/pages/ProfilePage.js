@@ -12,6 +12,12 @@ import Container from '@material-ui/core/Container';
 import user from '../data/user.json'
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    height: '100%',
+    marginTop: theme.spacing(0),
+    padding: theme.spacing(6, 6),
+    flexGrow: 1
+  },
   icon: {
     marginRight: theme.spacing(2)
   },
@@ -49,27 +55,22 @@ export default function ProfilePage() {
   const classes = useStyles();
 
   return (
-    <>
+    <Container maxWidth="sm" component="main" className={classes.container}>
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Hello {user.name}
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc.
-              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-              entirely.
+              Something short and leading about the collection below—its contents,
+              the creator, etc. Make it short and sweet, but not too short so
+              folks don&apos;t simply skip over it entirely.
           </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
               <Grid item>
                 <Button variant="contained" color="primary">
-                    Main call to action
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button variant="outlined" color="primary">
-                    Secondary action
+                    Add New Stuff
                 </Button>
               </Grid>
             </Grid>
@@ -107,6 +108,6 @@ export default function ProfilePage() {
           ))}
         </Grid>
       </Container>
-    </>
+    </Container>
   );
 }

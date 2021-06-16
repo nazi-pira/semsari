@@ -3,17 +3,24 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
   });
 }
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    backgroundColor: theme.palette.primary.contrastText
+  }
+}));
 
 export default function ProductSearch() {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState([]);
   const loading = open && options.length === 0;
+  const classes = useStyles();
 
   React.useEffect(() => {
     let active = true;
@@ -62,6 +69,7 @@ export default function ProductSearch() {
           {...params}
           label="Search"
           variant="outlined"
+          className={classes.textField}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

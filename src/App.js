@@ -1,11 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
-import Container from '@material-ui/core/Container'
 
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
@@ -15,35 +12,20 @@ import ProfilePage from './pages/ProfilePage';
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
-import theme from './theme';
-
-const useStyles = makeStyles((th) => ({
-  container: {
-    height: '100%',
-    marginTop: th.spacing(0),
-    padding: th.spacing(6, 6),
-    flexGrow: 1
-  }
-}));
+import customTheme from './theme';
 
 export default function App() {
-  const classes = useStyles();
-
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <Router>
         <Navbar />
-
-        <Container className={classes.container}>
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/signup" component={SignUpPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/profile" component={ProfilePage} />
-          </Switch>
-        </Container>
-
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/profile" component={ProfilePage} />
+        </Switch>
         <Footer />
       </Router>
     </ThemeProvider>

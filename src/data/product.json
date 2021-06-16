@@ -1,6 +1,26 @@
 [
   {
     "title": "some junk",
-    "description": "bla bla bla"
+    "description": "bla bla bla",
+    "created": "2020-01-01T12:12:33.00Z",
+    "rating": 3
+  },
+  {
+    "title": "Mountaing bike",
+    "description": "Great bike. works, 12 gears.",
+    "created": "2020-04-05T02:04:01.00Z",
+    "rating": 5
+  },
+  {
+    "title": "tent",
+    "description": "Great tenty. works,",
+    "created": "2020-08-05T02:04:01.00Z",
+    "rating": 2
+  },
+  {
+    "title": "desk",
+    "description": "Great desk. works, 4 gears.",
+    "created": "2020-07-05T02:04:01.00Z",
+    "rating": 4
   }
 ]

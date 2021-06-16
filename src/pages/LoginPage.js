@@ -13,6 +13,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    height: '100%',
+    marginTop: theme.spacing(0),
+    padding: theme.spacing(6, 6),
+    flexGrow: 1
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -36,7 +42,7 @@ export default function LoginPage() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

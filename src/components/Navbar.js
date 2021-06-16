@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -51,6 +52,7 @@ export default function Navbar() {
               Semsari
             </Link>
           </Typography>
+          <Button variant="outlined" color="inherit">Upload</Button>
           <Button component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button>
           <Button component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button>
           {auth && (
