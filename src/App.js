@@ -10,16 +10,19 @@ import Container from '@material-ui/core/Container'
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignupPage';
+import ProfilePage from './pages/ProfilePage';
+
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 import theme from './theme';
 
 const useStyles = makeStyles((th) => ({
-  root: {
+  container: {
     height: '100%',
     marginTop: th.spacing(0),
-    padding: th.spacing(6, 6)
+    padding: th.spacing(6, 6),
+    flexGrow: 1
   }
 }));
 
@@ -32,11 +35,12 @@ export default function App() {
       <Router>
         <Navbar />
 
-        <Container className={classes.root}>
+        <Container className={classes.container}>
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route path="/signup" component={SignUpPage} />
             <Route path="/login" component={LoginPage} />
+            <Route path="/profile" component={ProfilePage} />
           </Switch>
         </Container>
 

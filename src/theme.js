@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 import HeavyRain from './fonts/HeavyRain.ttf';
 
@@ -48,4 +48,4 @@ const theme = createMuiTheme({
   }
 });
 
-export default theme
+export default responsiveFontSizes(theme, { factor: 2, variants: ['h3'] })

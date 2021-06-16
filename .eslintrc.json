@@ -75,7 +75,7 @@
     "no-else-return": "off",
     "no-irregular-whitespace": "error",
     "no-multiple-empty-lines": [
-      "error",
+      "warn",
       {
         "max": 1
       }
