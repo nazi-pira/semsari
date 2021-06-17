@@ -8,6 +8,8 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
+import SellProductPage from './pages/SellProductPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="/signup" component={SignUpPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/sell" component={SellProductPage} />
+          <Route path="/product/:productId" component={ProductDetailPage} />
         </Switch>
         <Footer />
       </Router>

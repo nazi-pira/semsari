@@ -10,12 +10,20 @@ function sleep(delay = 0) {
     setTimeout(resolve, delay);
   });
 }
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    backgroundColor: theme.palette.primary.contrastText
+
+const useStyles = makeStyles(() => ({
+  inputRoot: {
+    color: 'blue',
+    fontFamily: 'Roboto Mono',
+    backgroundColor: '#fff',
+    '&:hover': {
+      backgroundColor: '#fff'
+    },
+    '&:Mui-focused': {
+      backgroundColor: 'green'
+    }
   }
 }));
-
 export default function ProductSearch() {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState([]);
@@ -53,6 +61,7 @@ export default function ProductSearch() {
   return (
     <Autocomplete
       id="search"
+      classes={classes}
       open={open}
       onOpen={() => {
         setOpen(true);
@@ -68,8 +77,8 @@ export default function ProductSearch() {
         <TextField
           {...params}
           label="Search"
-          variant="outlined"
-          className={classes.textField}
+          variant="filled"
+          style={{ backgroundColor: 'pink !important' }}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

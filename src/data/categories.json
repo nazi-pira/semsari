@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Books",
+    "tags": ["Books", "Literature", "Novel"]
+  },
+  {
+    "title": "Home",
+    "tags": ["Home", "Antiques", "Furniture", "Livingroom", "Appliances"]
+  },
+  {
+    "title": "Clothes",
+    "tags": ["clothes", "Masquerade", "Fashion", "High street brands"]
+  }
+]

@@ -73,6 +73,7 @@
     "no-console": "error",
     "no-debugger": "error",
     "no-else-return": "off",
+    "no-underscore-dangle": "off",
     "no-irregular-whitespace": "error",
     "no-multiple-empty-lines": [
       "warn",

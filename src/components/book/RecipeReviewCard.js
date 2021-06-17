@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import * as moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +62,7 @@ export default function RecipeReviewCard(params) {
           </IconButton>
         }
         title={title}
-        subheader={created} />
+        subheader={moment(created, 'YYYYMMDD').fromNow()} />
       <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"
