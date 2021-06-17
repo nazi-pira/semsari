@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
 
 export default function SignUpForm() {
   return (
@@ -77,6 +78,11 @@ export default function SignUpForm() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="I agree to the terms and conditions" />
+        </Grid>
+        <Grid>
+          <Button variant="contained" size="large" color="primary">
+            Sign Up
+          </Button>
         </Grid>
       </Grid>
     </>

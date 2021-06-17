@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 // import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     '&:link': {
       textDecoration: 'none'
     }
+  },
+  input: {
+    display: 'none'
   }
 }));
 
@@ -65,6 +69,7 @@ export default function Navbar() {
                 color="inherit">
                 <AccountCircle />
               </IconButton>
+              <AddShoppingCartIcon />
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}

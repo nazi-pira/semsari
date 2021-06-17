@@ -8,8 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Link as RouterLink } from 'react-router-dom';
 
 import user from '../data/user.json'
+import UploadButtons from '../components/product/uploadItem'
+
+import products from '../data/products.json'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function ProfilePage() {
   const classes = useStyles();
 
@@ -68,7 +70,7 @@ export default function ProfilePage() {
             <Grid container spacing={2} justify="center">
               <Grid item>
                 <Button variant="contained" color="primary">
-                    Add New Stuff
+                  <UploadButtons />
                 </Button>
               </Grid>
             </Grid>
@@ -78,8 +80,8 @@ export default function ProfilePage() {
       <Container className={classes.cardGrid} maxWidth="md">
         {/* End hero unit */}
         <Grid container spacing={4}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
+          {products.map((product) => (
+            <Grid item key={product._id} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
@@ -87,14 +89,14 @@ export default function ProfilePage() {
                   title="Image title" />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                    {product.title}
                   </Typography>
                   <Typography>
-                      This is a media card. You can use this section to describe the content.
+                    {product.description}
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" component={RouterLink} to={`/product/${product._id}`}>
                       View
                   </Button>
                   <Button size="small" color="primary">

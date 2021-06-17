@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@material-ui/core';
-
+// import Carousel from 'react-material-ui-carousel';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+import ProductCard from '../product/ProductCard';
 
 const useStyles = makeStyles((theme) => ({
   carousel: {
@@ -15,48 +19,67 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function ProductCarousel(props) {
-  const items = [
-    {
-      _id: '12345',
-      title: 'Bike',
-      description: 'Great bike with retro in stryle.',
-      imageUrl: '/images/uploads/bike1.jpg'
-    },
-    {
-      _id: '56789',
-      title: 'Antique phone',
-      description: 'Antique phone from 1820. Great condition.',
-      imageUrl: '/images/uploads/phone1.jpg'
-    },
-    {
-      _id: '14554',
-      title: 'Armchair',
-      description: 'Armchair from from 1710. Great condition.',
-      imageUrl: '/images/uploads/armchair1.jpg'
-    }
-  ]
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
+export default function ProductCarousel(props) {
+  const { products } = props
   return (
-    <Carousel>
+    <Carousel
+      responsive={responsive}
+      showDots
+      infinite>
       {
-        items.map((item) => <Item key={item._id} item={item} />)
+        products.map((product) => {
+          return (
+            <ProductCard key={product._id} product={product} />
+          )
+        })
       }
     </Carousel>
   )
 }
 
-function Item(props) {
-  const classes = useStyles();
-  const { title, description, imageUrl } = props.item;
-  return (
-    <Paper>
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <Button className="CheckButton">
-        Check it out!
-      </Button>
-      <img src={imageUrl} alt={title} className={classes.item.image} />
-    </Paper>
-  )
-}
+// export default function ProductCarousel(_props) {
+//   return (
+//     <Carousel
+//       animation="slide"
+//       navButtonsAlwaysVisible="true">
+//       {
+//         products.map((product, index) => {
+//           const positions = [index - 1, index, index + 1]
+
+//           if (index === 0) {
+//             positions[0] = products.length - 1
+//           } else if (index === products.length - 1) {
+//             positions[2] = 0
+//           }
+//           return (
+//             <Grid key={products[index]._id} container justify="space-evenly">
+//               <ProductCard key={product._id} product={products[positions[0]]} />
+//               <ProductCard key={product._id} product={products[positions[1]]} />
+//               <ProductCard key={product._id} product={products[positions[2]]} />
+//             </Grid>
+//           )
+//         })
+//       }
+//     </Carousel>
+//   )
+// }
