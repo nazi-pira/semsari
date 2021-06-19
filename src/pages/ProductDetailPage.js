@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 
 import Container from '@material-ui/core/Container';
 
@@ -49,11 +51,19 @@ export default function ProductDetailPage() {
               <div>
                 {product.created}
               </div>
+              <div>
+                <Chip className={classes.chip} label="Extra Soft" />
+                <Chip className={classes.chip} color="primary" label="Soft" />
+                <Chip className={classes.chip} label="Medium" />
+                <Chip className={classes.chip} label="Hard" />
+              </div>
+              <div className={classes.section3}>
+                <Button color="primary">Add to cart</Button>
+              </div>
             </Grid>
           </Paper>
         </Grid>
       </div>
-
     </Container>
   );
 }

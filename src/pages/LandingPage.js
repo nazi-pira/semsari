@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container'
+import Divider from '@material-ui/core/Divider';
 
 import ProductSearch from '../components/ProductSearch'
 import ProductCarousel from '../components/LandingPage/ProductCarousel'
@@ -46,6 +47,7 @@ export default function LandingPage() {
           <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
             <ProductCarousel products={products} />
           </Grid>
+          <Divider variant="middle" />
           <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
             <ProductCarousel products={products} />
           </Grid>
