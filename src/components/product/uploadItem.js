@@ -19,14 +19,14 @@ export default function UploadButtons() {
   return (
     <div className={classes.root}>
       <input
-        accept="image/*"
+        accept="file/*"
         className={classes.input}
         id="contained-button-file"
         multiple
         type="file" />
       <label htmlFor="contained-button-file">
         <Button variant="contained" color="primary" component="span">
-          Upload
+          Add a new item
         </Button>
       </label>
     </div>

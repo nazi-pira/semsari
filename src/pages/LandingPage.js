@@ -46,6 +46,12 @@ export default function LandingPage() {
           <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
             <ProductCarousel products={products} />
           </Grid>
+          <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
+            <ProductCarousel products={products} />
+          </Grid>
+          <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
+            <ProductCarousel products={products} />
+          </Grid>
         </Grid>
       </Container>
     </div>

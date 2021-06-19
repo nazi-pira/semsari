@@ -17,6 +17,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(9),
     padding: theme.spacing(3, 6),
     flexGrow: 1
+  },
+  card: {
+    display: 'flex'
+  },
+  cardDetails: {
+    flex: 1
+  },
+  cardMedia: {
+    width: 160
   }
 }))
 
