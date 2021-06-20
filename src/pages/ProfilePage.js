@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
+import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from 'react-router-dom';
@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
   heroButtons: {
     marginTop: theme.spacing(4)
   },
-  footer: {
+  items: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6)
+    padding: theme.spacing(1)
   }
 }));
 
@@ -54,13 +54,18 @@ export default function ProfilePage() {
           </Grid>
         </div>
       </Box>
-      <Grid container spacing={1}>
-        {items && items.filter((item) => item.user._id === userId).map((item) => (
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <ItemCard key={item._id} item={item} />
-          </Grid>
-        ))}
-      </Grid>
+      <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+        My Items
+      </Typography>
+      <Paper variant="outline" elevation={2} className={classes.items}>
+        <Grid container spacing={1}>
+            {items && items.filter((item) => item.user._id === userId).map((item) => (
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <ItemCard key={item._id} item={item} />
+              </Grid>
+            ))}
+        </Grid>
+      </Paper>
     </Container>
   );
 }

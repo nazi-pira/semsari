@@ -14,7 +14,6 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import { Link as RouterLink } from 'react-router-dom';
@@ -23,29 +22,18 @@ import * as moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345
+    maxWidth: 345,
+    border: 'black solid 1px'
   },
   media: {
     height: 0,
     paddingTop: '56.25%' // 16:9
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  },
   avatar: {
     backgroundColor: red[500]
   },
-  cardActions: {
-    flexDirection: 'row',
-    alignItems: 'space-between',
-    justifyContent: 'space-between'
+  cardContent: {
+    height: 60
   },
   cardHeader: {
     padding: theme.spacing(2),
@@ -59,17 +47,29 @@ const useStyles = makeStyles((theme) => ({
   cardHeaderTitleGroup: {
     flex: '1 1 auto'
   },
-  cardHeaderTitle: {
+  overflow: {
     display: 'table',
     tableLayout: 'fixed',
     width: '100%'
   },
-  cardHeaderTextCell: {
+  singleLineOverflow: {
     display: 'table-cell',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    width: 'inherit'
+    whiteSpace: 'nowrap'
+  },
+  multiLineOverflow: {
+    display: 'box',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'wrap',
+    lineClamp: 3,
+    boxOrient: 'vertical'
+  },
+  cardActions: {
+    flexDirection: 'row',
+    alignItems: 'space-between',
+    justifyContent: 'space-between'
   }
 }));
 
@@ -105,8 +105,8 @@ export default function ItemCard(params) {
         title={
         <HtmlTooltip
           title={item.title}>
-          <div className={classes.cardHeaderTitle}>
-            <div className={classes.cardHeaderTextCell}>{item.title}</div>
+          <div className={classes.overflow}>
+            <div className={classes.singleLineOverflow}>{item.title}</div>
           </div>
         </HtmlTooltip>
         }
@@ -114,10 +114,12 @@ export default function ItemCard(params) {
       <CardMedia
         className={classes.media}
         image={item.images[0]}
-        title="Paella dish" />
-      <CardContent>
+        title={item.title} />
+      <CardContent className={classes.cardContent}>
         <Typography variant="body2" color="textSecondary" component="p">
-          {item.description}
+          <div className={classes.overflow}>
+            <div className={classes.multiLineOverflow}>{item.description}</div>
+          </div>
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
