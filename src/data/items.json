@@ -1,0 +1,76 @@
+[
+  {
+    "_id": "p1",
+    "title": "Dante Alighieri - The Divine Comedy + posters and a toy",
+    "description": "The famous classic published 1320. Unedited.",
+    "created": "2020-01-01T12:12:33.00Z",
+    "images": ["/images/uploads/book1.jpg"],
+    "rating": 3,
+    "user": {
+      "_id": "347",
+      "name": "Alexander"
+    }
+  },
+  {
+    "_id": "p2",
+    "title": "Old Painting",
+    "description": "Old painting from 19th Century.",
+    "created": "2020-08-05T02:04:01.00Z",
+    "images": ["/images/uploads/painting1.jpg"],
+    "rating": 2,
+    "user": {
+      "_id": "347",
+      "name": "Daniel"
+    }
+  },
+  {
+    "_id": "p3",
+    "title": "Desk from 1986, redwood fibres. Recently polished.",
+    "description": "Great condition. Renaissance.",
+    "created": "2020-07-05T02:04:01.00Z",
+    "images": ["/images/uploads/desk1.jpg"],
+    "rating": 4,
+    "user": {
+      "_id": "123",
+      "name": "Nazanin",
+      "image": "/images/uploads/nazanin.jpg"
+    }
+  },
+  {
+    "_id": "p4",
+    "title": "Bike",
+    "description": "Great bike with retro in stryle.",
+    "created": "2021-06-03T12:04:01.00Z",
+    "images": ["/images/uploads/bike1.jpg"],
+    "rating": 5,
+    "user": {
+      "_id": "751",
+      "name": "Mikael"
+    }
+  },
+  {
+    "_id": "p5",
+    "title": "Antique phone",
+    "description": "Antique phone from 1820. Great condition.",
+    "created": "2021-06-03T11:41:01.00Z",
+    "images": ["/images/uploads/phone1.jpg"],
+    "rating": 5,
+    "user": {
+      "_id": "787",
+      "name": "Robert"
+    }
+  },
+  {
+    "_id": "p6",
+    "title": "Armchair",
+    "description": "Armchair from from 1710. Great condition.",
+    "created": "2021-06-09T08:12:40.00Z",
+    "images": ["/images/uploads/armchair1.jpg"],
+    "rating": 5,
+    "user": {
+      "_id": "123",
+      "name": "Nazanin",
+      "image": "/images/uploads/nazanin.jpg"
+    }
+  }
+]

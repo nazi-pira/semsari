@@ -4,14 +4,13 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container'
-import Divider from '@material-ui/core/Divider';
 
-import ProductSearch from '../components/ProductSearch'
-import ProductCarousel from '../components/LandingPage/ProductCarousel'
+import ItemSearch from '../components/ItemSearch'
+import ItemsCarousel from '../components/items/ItemsCarousel'
 
 import heroPic from '../assets/heroPic.jpg'
 
-import products from '../data/products.json'
+import items from '../data/items.json'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   contrastText: {
     color: theme.palette.primary.contrastText
   }
-
 }));
 
 export default function LandingPage() {
@@ -41,19 +39,13 @@ export default function LandingPage() {
         <Grid container spacing={3} direction="row" justify="center" alignItems="stretch">
           <Grid container xs={12} sm={10} md={9} lg={7} style={{ height: '60vh' }} alignItems="center">
             <Grid item xs={12}>
-              <ProductSearch />
+              <ItemSearch />
             </Grid>
           </Grid>
           <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
-            <ProductCarousel products={products} />
+            <ItemsCarousel items={items} />
           </Grid>
-          <Divider variant="middle" />
-          <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
-            <ProductCarousel products={products} />
-          </Grid>
-          <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
-            <ProductCarousel products={products} />
-          </Grid>
+          <hr />
         </Grid>
       </Container>
     </div>

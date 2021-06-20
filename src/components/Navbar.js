@@ -15,9 +15,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
-import UploadButtons from './product/uploadItem';
-// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2)
@@ -58,7 +55,7 @@ export default function Navbar() {
               Semsari
             </Link>
           </Typography>
-          <Button variant="outlined" color="inherit"><UploadButtons /></Button>
+          <Button component={RouterLink} variant="outlined" color="inherit" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
           <Button component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button>
           <Button component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button>
           {auth && (
