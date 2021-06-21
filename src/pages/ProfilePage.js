@@ -24,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2)
   },
-  heroButtons: {
-    marginTop: theme.spacing(4)
-  },
   items: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    marginTop: theme.spacing(4)
+  },
+  hr: {
+    margin: theme.spacing(5, 0, 5, 0)
   }
 }));
 
@@ -46,18 +47,17 @@ export default function ProfilePage() {
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
             Something short and leading about the collection below
         </Typography>
-        <div className={classes.heroButtons}>
-          <Grid container spacing={2} justify="center">
-            <Grid item>
-              <Button component={RouterLink} variant="contained" color="primary" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
-            </Grid>
+        <Grid container spacing={2} justify="center">
+          <Grid item>
+            <Button component={RouterLink} variant="contained" color="primary" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
           </Grid>
-        </div>
+        </Grid>
       </Box>
-      <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-        My Items
-      </Typography>
+      <hr className={classes.hr} />
       <Paper variant="outline" elevation={2} className={classes.items}>
+        <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
+          My Items
+        </Typography>
         <Grid container spacing={1}>
             {items && items.filter((item) => item.user._id === userId).map((item) => (
               <Grid item xs={12} sm={6} md={4} lg={3}>

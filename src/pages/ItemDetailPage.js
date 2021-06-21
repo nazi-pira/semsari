@@ -3,13 +3,12 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-
 import Container from '@material-ui/core/Container';
 
 import items from '../data/items.json'
@@ -39,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   }
 }))
+
 
 export default function ItemDetailPage() {
   const { itemId } = useParams();
