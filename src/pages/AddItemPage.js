@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
 
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography';
@@ -24,14 +25,20 @@ export default function AddItemPage() {
     <Container component="main" className={classes.container}>
       <Box bgcolor="green">
         <Box flexWrap="nowrap" flexDirection="row" display="flex">
-          <Box height="400px" width="50%" bgcolor="blue">
+          <Box height="400px" width="50%" bgcolor="#fff">
               <img alt="upload" />
           </Box>
-          <Box height="400px" width="50%" bgcolor="red">
-              FORM
+          <Box display="flex" height="400px" width="50%" bgcolor="red">
+          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+            <TextField
+              id="outlined-multiline-static"
+              label="Multiline"
+              multiline
+              rows={4}
+              defaultValue="Default Value"
+              variant="outlined" />
           </Box>
         </Box>
-
         <Box flexWrap="nowrap" flexDirection="row" display="flex">
           <Box width="50%" bgcolor="lightblue">
             <Button variant="contained" color="primary" onClick={() => { window.alert('Upload photo') }}><Typography variant="button">Upload photo</Typography></Button>

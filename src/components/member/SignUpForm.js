@@ -4,10 +4,26 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: '#fff',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    padding: theme.spacing(3, 3)
+  },
+  card: {
+    border: 'yellow solid 2px'
+  }
+}));
 
 export default function SignUpForm() {
+  const classes = useStyles();
   return (
-    <>
+    <Paper className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -78,13 +94,11 @@ export default function SignUpForm() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="I agree to the terms and conditions" />
-        </Grid>
-        <Grid>
-          <Button variant="contained" size="large" color="primary">
-            Sign Up
-          </Button>
+              <Button variant="contained" size="large" color="primary">
+                Sign Up
+              </Button>
         </Grid>
       </Grid>
-    </>
+    </Paper>
   );
 }
