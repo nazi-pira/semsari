@@ -117,9 +117,9 @@ export default function ItemCard(params) {
         title={item.title} />
       <CardContent className={classes.cardContent}>
         <Typography variant="body2" color="textSecondary" component="p">
-          <div className={classes.overflow}>
-            <div className={classes.multiLineOverflow}>{item.description}</div>
-          </div>
+          <span className={classes.overflow}>
+            <span className={classes.multiLineOverflow}>{item.description}</span>
+          </span>
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>

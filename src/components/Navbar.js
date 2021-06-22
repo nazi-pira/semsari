@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -68,7 +67,6 @@ export default function Navbar() {
                 color="inherit">
                 <AccountCircle />
               </IconButton>
-              <AddShoppingCartIcon />
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -86,12 +84,6 @@ export default function Navbar() {
                 <MenuItem onClick={handleClose}>
                   <Link className={classes.link} component={RouterLink} color="inherit" to="/profile">
                     Profile
-                  </Link>
-                </MenuItem>
-
-                <MenuItem onClick={handleClose}>
-                  <Link className={classes.link} component={RouterLink} color="inherit" to="/">
-                    My stuff
                   </Link>
                 </MenuItem>
 

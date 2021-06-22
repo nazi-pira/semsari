@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container'
+import Box from '@material-ui/core/Box';
 
 import ItemSearch from '../components/ItemSearch'
 import ItemsCarousel from '../components/items/ItemsCarousel'
@@ -36,17 +37,14 @@ export default function LandingPage() {
   return (
     <div className={classes.root}>
       <Container component="main" className={classes.container}>
-        <Grid container spacing={3} direction="row" justify="center" alignItems="stretch">
-          <Grid container xs={12} sm={10} md={9} lg={7} style={{ height: '60vh' }} alignItems="center">
-            <Grid item xs={12}>
+        <Box>
+          <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
               <ItemSearch />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} direction="row" justify="space-evenly" wrap="wrap" alignContent="space-between">
+          </Box>
+          <Box marginBottom={1} flexGrow="grow">
             <ItemsCarousel items={items} />
-          </Grid>
-          <hr />
-        </Grid>
+          </Box>
+        </Box>
       </Container>
     </div>
 

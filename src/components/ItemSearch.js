@@ -69,6 +69,7 @@ export default function ItemSearch() {
       onClose={() => {
         setOpen(false);
       }}
+      fullWidth
       getOptionSelected={(option, value) => option.name === value.name}
       getOptionLabel={(option) => option.name}
       options={options}

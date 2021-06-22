@@ -4,79 +4,91 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
-
+import MenuItem from '@material-ui/core/MenuItem';
+import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 import { Link as RouterLink } from 'react-router-dom';
 
+import heroPic from '../assets/AddItemImg.jpg'
+
+const currencies = [
+  {
+    value: 'USD',
+    label: '$'
+  },
+  {
+    value: 'EUR',
+    label: '€'
+  },
+  {
+    value: 'BTC',
+    label: '฿'
+  },
+  {
+    value: 'JPY',
+    label: '¥'
+  }
+]
+
 const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundImage: `url(${heroPic})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   container: {
     marginTop: theme.spacing(0),
     padding: theme.spacing(3, 6),
     flexGrow: 1
+  },
+  noImage: {
+    width: '100%',
+    height: '100%'
   }
 }));
 
 export default function AddItemPage() {
   const classes = useStyles();
 
+  const uploadedImage = '/images/uploads/bike1.jpg'
+
   return (
-    <Container component="main" className={classes.container}>
-      <Box bgcolor="green">
-        <Box flexWrap="nowrap" flexDirection="row" display="flex">
-          <Box height="400px" width="50%" bgcolor="#fff">
-              <img alt="upload" />
-          </Box>
-          <Box display="flex" height="400px" width="50%" bgcolor="red">
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-            <TextField
-              id="outlined-multiline-static"
-              label="Multiline"
-              multiline
-              rows={4}
-              defaultValue="Default Value"
-              variant="outlined" />
+    <div className={classes.root}>
+      <Container component="main" className={classes.container}>
+        <Box bgcolor="primary">
+          <Box flexWrap="wrap" flexDirection="row" display="flex" flexGrow="1" justifyContent="center">
+            <Box height="400px" minWidth="300px" width="50%" bgcolor="#fff" border="black solid 2px">
+              {uploadedImage ? <img alt="upload" src={uploadedImage} width="100%" /> : <Avatar variant="square" className={classes.noImage}><Button variant="contained" color="primary" onClick={() => { window.alert('Upload photo') }}><CameraAltIcon /><Typography variant="button">Upload</Typography></Button></Avatar>}
+            </Box>
+            <Box display="flex" flexDirection="column" alignItems="center" height="400px" minWidth="300px" width="50%" bgcolor="#ffff" border="black solid 1px" p={3}>
+              <Typography variant="h5">Add Item</Typography>
+              <Box p={1} pt={2} width="100%">
+                <TextField id="title" label="Title" fullWidth variant="outlined" required />
+              </Box>
+              <Box p={1} width="100%">
+                <TextField id="description" label="Description" fullWidth multiline rows={4} variant="outlined" required />
+              </Box>
+              <Box p={1} width="100%">
+                <TextField id="price" label="Price" type="number" fullWidth variant="outlined" required />
+              </Box>
+              <Box p={1}>
+                <Button variant="contained" color="primary" onClick={() => { window.alert('Publish Item') }}>
+                  <Typography variant="button">Publish Item</Typography>
+                </Button>
+              </Box>
+            </Box>
+            <Box flexWrap="nowrap" flexDirection="row" display="flex" />
           </Box>
         </Box>
-        <Box flexWrap="nowrap" flexDirection="row" display="flex">
-          <Box width="50%" bgcolor="lightblue">
-            <Button variant="contained" color="primary" onClick={() => { window.alert('Upload photo') }}><Typography variant="button">Upload photo</Typography></Button>
-          </Box>
-          <Box width="50%" bgcolor="pink">
-          <Button variant="contained" color="primary" onClick={() => { window.alert('Publish Item') }}><Typography variant="button">Publish Item</Typography></Button>
-          </Box>
-        </Box>
-
-        {/* <Box container diretion="row" justify="space-between">
-          <Box item alignItems="flex-end" alignContent="flex-end" style={{ backgroundColor: 'yellow' }} xs={8}>
-            xxzx
-          </Box>
-          <Box item alignItems="flex-end" alignContent="flex-end" style={{ backgroundColor: 'purple' }}>
-            <Button component={RouterLink} variant="contained" color="primary" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
-          </Box>
-        </Box> */}
-      </Box>
-
-      {/* <Grid container direction="column" sm={12} alignItems="space-between" justify="space-between" alightContent="space-between" style={{ height: 400 }}>
-        <Grid container direction="row" alignItems="stretch" justify="center">
-          <Grid item style={{ backgroundColor: 'red' }} xs={8} justify="stretch">
-            <img alt="upload" />
-          </Grid>
-          <Grid item style={{ backgroundColor: 'blue' }} xs={4} justify="stretch">
-            2
-          </Grid>
-        </Grid>
-        <Grid container diretion="row" justify="space-between">
-          <Grid item alignItems="flex-end" alignContent="flex-end" style={{ backgroundColor: 'yellow' }} xs={8}>
-            xxzx
-          </Grid>
-          <Grid item alignItems="flex-end" alignContent="flex-end" style={{ backgroundColor: 'purple' }}>
-            <Button component={RouterLink} variant="contained" color="primary" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
-          </Grid>
-        </Grid>
-      </Grid> */}
-
-    </Container>
+      </Container>
+    </div>
   );
 }

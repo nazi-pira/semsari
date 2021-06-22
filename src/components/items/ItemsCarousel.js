@@ -45,8 +45,8 @@ export default function ItemsCarousel(props) {
       {
         items.map((item) => {
           return (
-            <div className={classes.card}>
-              <ItemCard key={item._id} item={item} />
+            <div className={classes.card} key={item._id}>
+              <ItemCard item={item} />
             </div>
           )
         })

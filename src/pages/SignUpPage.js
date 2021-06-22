@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 import SignUpForm from '../components/member/SignUpForm'
-
 import heroPic from '../assets/signupimg.jpg'
 
 const useStyles = makeStyles((theme) => ({

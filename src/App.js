@@ -10,6 +10,7 @@ import SignUpPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import AddItemPage from './pages/AddItemPage';
+import searchItemPage from './pages/searchItemPage';
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/item/view/:itemId" component={ItemDetailPage} />
           <Route path="/item/add" component={AddItemPage} />
+          <Route path="/searchItemPage" component={searchItemPage} />
         </Switch>
         <Footer />
       </Router>
