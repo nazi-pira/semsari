@@ -44,9 +44,7 @@ export default function ProfilePage() {
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
             Hello {user.name}
         </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Something short and leading about the collection below
-        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" paragraph />
         <Grid container spacing={2} justify="center">
           <Grid item>
             <Button component={RouterLink} variant="contained" color="primary" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
