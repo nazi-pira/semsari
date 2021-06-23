@@ -52,40 +52,41 @@ const useStyles = makeStyles((theme) => ({
   noImage: {
     width: '100%',
     height: '100%'
+  },
+  image: {
+    maxWidth: '100%',
+    maxHeight: '100%'
   }
 }));
 
 export default function AddItemPage() {
   const classes = useStyles();
 
-  const uploadedImage = '/images/uploads/bike1.jpg'
+  const uploadedImage = undefined // '/images/uploads/bike1.jpg'
 
   return (
     <div className={classes.root}>
       <Container component="main" className={classes.container}>
-        <Box bgcolor="primary">
-          <Box flexWrap="wrap" flexDirection="row" display="flex" flexGrow="1" justifyContent="center">
-            <Box height="400px" minWidth="300px" width="50%" bgcolor="#fff" border="black solid 2px">
-              {uploadedImage ? <img alt="upload" src={uploadedImage} width="100%" /> : <Avatar variant="square" className={classes.noImage}><Button variant="contained" color="primary" onClick={() => { window.alert('Upload photo') }}><CameraAltIcon /><Typography variant="button">Upload</Typography></Button></Avatar>}
+        <Box flexWrap="wrap" flexDirection="row" display="flex" flexGrow="1" justifyContent="center" border="black solid 1px">
+          <Box height="400px" minWidth="300px" width="50%" bgcolor="gray">
+            {uploadedImage ? <img alt="upload" src={uploadedImage} className={classes.image} /> : <Avatar variant="square" className={classes.noImage}><Button variant="contained" color="primary" onClick={() => { window.alert('Upload photo') }}><CameraAltIcon /><Typography variant="button">Upload</Typography></Button></Avatar>}
+          </Box>
+          <Box display="flex" flexDirection="column" alignItems="center" height="400px" minWidth="300px" width="50%" bgcolor="white" p={3}>
+            <Typography variant="h5">Add Item</Typography>
+            <Box p={1} pt={2} width="100%">
+              <TextField id="title" label="Title" fullWidth variant="outlined" required />
             </Box>
-            <Box display="flex" flexDirection="column" alignItems="center" height="400px" minWidth="300px" width="50%" bgcolor="#ffff" border="black solid 1px" p={3}>
-              <Typography variant="h5">Add Item</Typography>
-              <Box p={1} pt={2} width="100%">
-                <TextField id="title" label="Title" fullWidth variant="outlined" required />
-              </Box>
-              <Box p={1} width="100%">
-                <TextField id="description" label="Description" fullWidth multiline rows={4} variant="outlined" required />
-              </Box>
-              <Box p={1} width="100%">
-                <TextField id="price" label="Price" type="number" fullWidth variant="outlined" required />
-              </Box>
-              <Box p={1}>
-                <Button variant="contained" color="primary" onClick={() => { window.alert('Publish Item') }}>
-                  <Typography variant="button">Publish Item</Typography>
-                </Button>
-              </Box>
+            <Box p={1} width="100%">
+              <TextField id="description" label="Description" fullWidth multiline rows={4} variant="outlined" required />
             </Box>
-            <Box flexWrap="nowrap" flexDirection="row" display="flex" />
+            <Box p={1} width="100%">
+              <TextField id="price" label="Price" type="number" fullWidth variant="outlined" required />
+            </Box>
+            <Box p={1}>
+              <Button variant="contained" color="primary" onClick={() => { window.alert('Publish Item') }}>
+                <Typography variant="button">Publish Item</Typography>
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Container>

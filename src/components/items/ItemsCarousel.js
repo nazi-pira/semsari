@@ -40,7 +40,6 @@ export default function ItemsCarousel(props) {
   return (
     <Carousel
       responsive={responsive}
-      showDots
       infinite>
       {
         items.map((item) => {

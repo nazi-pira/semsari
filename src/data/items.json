@@ -52,7 +52,10 @@
     "user": {
       "_id": "751",
       "name": "Mikael",
-      "email": "mikael@mail.com"
+      "email": "mikael@mail.com",
+      "lastname": "Persson",
+      "city": "Stockholm",
+      "phonenumber": "0767778888"
     },
     "price": 8000
   },

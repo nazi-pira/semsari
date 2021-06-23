@@ -1,13 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
+
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'grid',
+    gridTemplateColumns: 'minmax(350px, 600px)',
+    gridTemplateRows: 'auto auto'
+  },
   image: {
     maxWidth: '100%',
     maxHeight: '100%'
@@ -22,23 +28,22 @@ export default function ItemDetail({ item }) {
   const classes = useStyles();
 
   return (
-    <Box flexWrap="wrap" flexDirection="row" display="flex" justifyContent="center" border="black solid 1px">
-      <Box height="400px" minWidth="300px" width="50%" bgcolor="gray" display="flex" alignItems="center" justifyContent="center">
-        {item.images[0] ? <img className={classes.image} alt="upload" src={item.images[0]} /> : <Avatar variant="square" className={classes.noImage}><CameraAltIcon /> No Image <Typography variant="button">Upload</Typography></Avatar>}
+    <Box container className={classes.root} bgcolor="primary" display="flex" alignItems="center" justifyContent="center" borderRadius="10px">
+      <Box width="100%" height="100%" bgcolor="#fff" display="flex" justifyContent="center" alignItems="center">
+        {item.images[0] ? <img alt="upload" src={item.images[0]} className={classes.image} /> : <Avatar variant="square" className={classes.noImage}><CameraAltIcon /><Typography variant="button">Upload</Typography></Avatar>}
       </Box>
-      <Box display="flex" flexDirection="column" alignItems="center" height="400px" minWidth="300px" width="50%" bgcolor="#ffff" p={3}>
-        <Typography variant="h5">Add Item</Typography>
+      <Box display="flex" flexDirection="column" alignItems="center" height="100%" width="100%" bgcolor="#ffff" p={3}>
         <Box p={1} pt={2} width="100%">
-          <TextField id="title" label="Title" fullWidth variant="outlined" required />
+          <Typography variant="h5">{item.title}</Typography>
         </Box>
-        <Box p={1} width="100%">
-          <TextField id="description" label="Description" fullWidth multiline rows={4} variant="outlined" required />
+        <Box p={1} borderRadius="10px" width="100%">
+          <Typography variant="body1">{item.description}</Typography>
         </Box>
-        <Box p={1} width="100%">
-          <div> {item.price} </div>
+        <Box p={1} borderRadius="10px" width="100%">
+          <Typography variant="h6">{item.price} SEK </Typography>
         </Box>
         <Box p={1}>
-          <Button variant="contained" color="primary" onClick={() => { window.alert('Contact') }}>
+          <Button variant="contained" color="primary" onClick={() => { window.alert('Publish Item') }}>
             <Typography variant="button">Contact</Typography>
           </Button>
         </Box>

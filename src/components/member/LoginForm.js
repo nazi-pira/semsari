@@ -85,7 +85,6 @@ export default function LoginForm() {
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2"> Sign Up </Link>
             <Link component={RouterLink} variant="body2" to="/signup">
               Sign Up
             </Link>

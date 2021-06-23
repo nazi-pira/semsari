@@ -9,14 +9,17 @@ import ItemDetail from '../components/items/ItemDetail'
 import items from '../data/items.json'
 import heroPic from '../assets/ItemDetailPage.jpg'
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundImage: `url(${heroPic})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    flexGrow: 1
+    flexGrow: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    display: 'flex',
+    justifyContent: 'center'
   },
   container: {
     marginTop: theme.spacing(0),
