@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -7,7 +8,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography';
 
-import { Link as RouterLink } from 'react-router-dom';
 import UploadButton from '../components/buttons/UploadButton'
 import backgroundImage from '../assets/AddItemImg.jpg'
 

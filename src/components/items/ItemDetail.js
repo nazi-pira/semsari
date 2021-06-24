@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -8,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'grid',
     gridTemplateColumns: 'minmax(350px, 600px)',
