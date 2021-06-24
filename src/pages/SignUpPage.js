@@ -4,11 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 import SignUpForm from '../components/member/SignUpForm'
-import heroPic from '../assets/signupimg.jpg'
+import backgroundImage from '../assets/signupimg.jpg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundImage: `url(${heroPic})`,
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: 'black',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

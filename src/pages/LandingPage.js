@@ -1,21 +1,23 @@
 import React from 'react';
 
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 
 import ItemSearch from '../components/ItemSearch'
 import ItemsCarousel from '../components/items/ItemsCarousel'
 
-import heroPic from '../assets/heroPic.jpg'
+import backgroundImage from '../assets/heroPic.jpg'
 
 import items from '../data/items.json'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundImage: `url(${heroPic})`,
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: 'black',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
@@ -28,8 +30,22 @@ const useStyles = makeStyles((theme) => ({
   },
   contrastText: {
     color: theme.palette.primary.contrastText
+  },
+  hr: {
+    margin: theme.spacing(2, 0, 2, 0)
   }
 }));
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: '#FFFFFF',
+    padding: '5px',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    margin: 'auto ',
+    width: '300px',
+    borderRadius: 10
+  }
+})(Typography);
 
 export default function LandingPage() {
   const classes = useStyles();
@@ -37,10 +53,12 @@ export default function LandingPage() {
   return (
     <div className={classes.root}>
       <Container component="main" className={classes.container}>
-        <Box>
+        <Box textAlign="center">
           <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
               <ItemSearch />
           </Box>
+            <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
+          <hr className={classes.hr} />
           <Box marginBottom={1} flexGrow="grow">
             <ItemsCarousel items={items} />
           </Box>

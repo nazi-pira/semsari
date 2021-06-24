@@ -7,11 +7,12 @@ import { makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import ItemDetail from '../components/items/ItemDetail'
 import items from '../data/items.json'
-import heroPic from '../assets/ItemDetailPage.jpg'
+import backgroundImage from '../assets/ItemDetailPage.jpg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundImage: `url(${heroPic})`,
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: 'black',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

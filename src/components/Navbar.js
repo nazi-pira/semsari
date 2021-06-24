@@ -57,45 +57,44 @@ export default function Navbar() {
           <Button component={RouterLink} variant="outlined" color="inherit" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
           <Button component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button>
           <Button component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit">
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left'
-                }}
-                open={open}
-                onClose={handleClose}>
-                <MenuItem onClick={handleClose}>
-                  <Link className={classes.link} component={RouterLink} color="inherit" to="/profile">
-                    Profile
-                  </Link>
-                </MenuItem>
+            {auth && (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit">
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                  open={open}
+                  onClose={handleClose}>
+                  <MenuItem onClick={handleClose}>
+                    <Link className={classes.link} component={RouterLink} color="inherit" to="/profile">
+                      Profile
+                    </Link>
+                  </MenuItem>
 
-                <MenuItem onClick={handleClose}>
-                  <Link className={classes.link} component={RouterLink} color="inherit" to="/logout">
-                    Logout
-                  </Link>
-                </MenuItem>
-              </Menu>
-            </div>
-          )},
-
+                  <MenuItem onClick={handleClose}>
+                    <Link className={classes.link} component={RouterLink} color="inherit" to="/logout">
+                      Logout
+                    </Link>
+                  </MenuItem>
+                </Menu>
+              </div>
+            )}
         </Toolbar>
       </Container>
     </AppBar>
