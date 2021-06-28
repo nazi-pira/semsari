@@ -14,7 +14,10 @@ import ItemSearch from '../components/ItemSearch'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   paper: {
     padding: theme.spacing(2),
