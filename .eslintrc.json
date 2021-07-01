@@ -73,6 +73,7 @@
     "no-debugger": "error",
     "no-else-return": "off",
     "no-underscore-dangle": "off",
+    "padded-blocks": "warn",
     "no-irregular-whitespace": "error",
     "no-multiple-empty-lines": [
       "warn",
@@ -83,7 +84,7 @@
     "no-param-reassign": "off",
     "no-restricted-syntax": "off",
     "object-curly-newline": [
-      "error",
+      "warn",
       {
         "ObjectExpression": {
           "consistent": true

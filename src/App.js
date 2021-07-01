@@ -13,6 +13,8 @@ import AddItemPage from './pages/AddItemPage';
 import searchItemPage from './pages/searchItemPage';
 
 import Navbar from './components/Navbar'
+import Navbar2 from './components/Navbar2'
+
 import Footer from './components/Footer'
 
 import customTheme from './theme';
@@ -22,7 +24,10 @@ export default function App() {
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <Router>
-        <Navbar />
+        <div>
+          <Navbar />
+          <Navbar2 />
+        </div>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/signup" component={SignUpPage} />

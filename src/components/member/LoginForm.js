@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -12,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { loginUser } from '../../reducers/userReducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginForm() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   return (
     <div className={classes.root}>
@@ -55,6 +62,7 @@ export default function LoginForm() {
           id="email"
           label="Email Address"
           name="email"
+          onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
           autoFocus />
         <TextField
@@ -66,15 +74,17 @@ export default function LoginForm() {
           label="Password"
           type="password"
           id="password"
+          onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password" />
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me" />
         <Button
-          type="submit"
+          type="button"
           fullWidth
           variant="contained"
           color="primary"
+          onClick={() => dispatch(loginUser({ email, password }))}
           className={classes.submit}>
           Sign In
         </Button>
