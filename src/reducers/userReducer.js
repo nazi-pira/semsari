@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 import fetch from 'node-fetch';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { BACKEND_BASE_URL } from '../config/config'
 
 export const userSlice = createSlice({
@@ -8,20 +8,34 @@ export const userSlice = createSlice({
   initialState: {
     user: {},
     status: '',
-    messages: {}
+    messages: {
+      error: {},
+      success: {}
+    },
+    isLoggedIn: false
   },
   reducers: {
+    setErrorMessage: (state, action) => {
+      state.messages.error = action.payload
+    },
+    setIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload
+    },
     setMessage: (state, action) => {
       state.messages = action.payload
     },
+    setSuccessMessage: (state, action) => {
+      state.messages.success = action.payload
+    },
     setUser: (state, action) => {
+      state.isLoggedIn = true
       state.user = action.payload
     }
   },
 
 });
 
-export const { setMessages } = userSlice.actions
+export const { actions } = userSlice
 
 export const loginUser = (email, password) => {
   return async (dispatch) => {
@@ -34,15 +48,16 @@ export const loginUser = (email, password) => {
         })
       if (response.status === 200) {
         const user = await response.json()
-        dispatch(userSlice.actions.setUser(user))
-        dispatch(userSlice.actions.setMessage({ success: 'You are logged in.' }))
+        dispatch(actions.setUser(user))
+        dispatch(actions.setIsLoggedIn(true))
+        dispatch(actions.setMessage({ success: { login: 'You are logged in!' } }))
       } else {
         const { message } = await response.json()
-        dispatch(userSlice.actions.setMessage({ error: message }))
+        dispatch(actions.setMessage({ error: { login: message } }))
       }
     } catch (err) {
-      console.error('>>> error:', err);
-      dispatch(userSlice.actions.setMessage({ error: 'Failed to login.' }))
+      console.log('>>> LOGIN ERROR:', err);
+      dispatch(actions.setMessage({ error: { login: 'Failed to login.' } }))
     }
   }
 }
@@ -52,22 +67,29 @@ export const registerUser = (name, lastname, phone, city, email, password) => {
     try {
       const response = await fetch(`${BACKEND_BASE_URL}/api/user/register`, {
         method: 'POST',
-        body: JSON.stringify(name, lastname, phone, city, email, password),
+        body: JSON.stringify({ name, lastname, phone, city, email, password }),
         headers: { 'Content-Type': 'application/json' }
       })
       if (response.status === 203) {
         const user = await response.json()
-        dispatch(userSlice.actions.setUser(user))
-        dispatch(userSlice.actions.setMessage({ success: 'You are logged in.' }))
+        dispatch(actions.setUser(user))
+        dispatch(actions.setMessage({ success: { register: 'Succesfully registered!' } }))
       } else {
         const { message } = await response.json()
-        dispatch(userSlice.actions.setMessage({ error: message }))
+        dispatch(actions.setMessage({ error: { register: message } }))
       }
     } catch (err) {
-      console.error('>>> error:', err);
-      dispatch(userSlice.actions.setMessage({ error: 'Failed to login.' }))
+      console.log('>>> REGISTER ERROR:', err);
+      dispatch(actions.setMessage({ error: { register: 'Failed to register' } }))
     }
   }
 }
 
+export const logoutUser = () => {
+  return async (dispatch) => {
+    dispatch(actions.setUser(null))
+    dispatch(actions.setUser(null))
+    dispatch(actions.setMessage({ success: { register: 'Successfully logged out!' } }))
+  }
+}
 export default userSlice.reducer

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from '@material-ui/styles';
@@ -20,6 +22,8 @@ import Footer from './components/Footer'
 import customTheme from './theme';
 
 export default function App() {
+  const { isLoggedIn } = useSelector((state) => state.user)
+
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
@@ -35,7 +39,7 @@ export default function App() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/item/view/:itemId" component={ItemDetailPage} />
           <Route path="/item/add" component={AddItemPage} />
-          <Route path="/searchItemPage" component={searchItemPage} />
+          <Route path="/search" component={searchItemPage} />
         </Switch>
         <Footer />
       </Router>

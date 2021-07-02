@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -13,6 +13,9 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+
+import { ValidatorForm } from 'react-material-ui-form-validator';
 
 import { loginUser } from '../../reducers/userReducer'
 
@@ -41,10 +44,14 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginForm() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { messages } = useSelector((state) => state.user)
 
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
+  const handleSubmit = () => {
+    dispatch(loginUser({ email, password }))
+  }
   return (
     <div className={classes.root}>
       <Avatar className={classes.avatar}>
@@ -53,7 +60,7 @@ export default function LoginForm() {
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <form className={classes.form} noValidate>
+      <ValidatorForm className={classes.form} onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -80,11 +87,10 @@ export default function LoginForm() {
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me" />
         <Button
-          type="button"
+          type="submit"
           fullWidth
           variant="contained"
           color="primary"
-          onClick={() => dispatch(loginUser({ email, password }))}
           className={classes.submit}>
           Sign In
         </Button>
@@ -100,7 +106,9 @@ export default function LoginForm() {
             </Link>
           </Grid>
         </Grid>
-      </form>
+        {messages?.error?.login ? <Alert severity="error"> {messages.error.login}</Alert> : <span />}
+        {messages?.success?.login ? <Alert severity="success"> {messages.success.login}</Alert> : <span />}
+      </ValidatorForm>
     </div>
   );
 }

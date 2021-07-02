@@ -1,11 +1,11 @@
 /* eslint-disable comma-dangle */
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
 import userReducer from '../reducers/userReducer';
+import itemReducer from '../reducers/itemReducer';
 
 const reducer = combineReducers({
   user: userReducer,
-  counter: counterReducer
+  item: itemReducer
 })
 
 export const store = configureStore({

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -14,6 +15,7 @@ import ItemsCarousel from '../components/items/ItemsCarousel'
 import backgroundImage from '../assets/heroPic.jpg'
 
 import items from '../data/items.json'
+import { getItemsByQuery } from '../reducers/itemReducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,16 +52,19 @@ const WhiteTextTypography = withStyles({
 
 export default function LandingPage() {
   const classes = useStyles();
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getItemsByQuery({ sort: 'created', order: 'desc', limit: 20 }))
+  }, [dispatch])
   return (
     <div className={classes.root}>
       <Container component="main" className={classes.container}>
         <Box textAlign="center">
           <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-              <ItemSearch />
-              <Button component={RouterLink} color="primary" to="/searchItemPage"><Typography variant="button">search</Typography></Button>
+            <ItemSearch />
+            <Button component={RouterLink} color="inherit" to="/search"><Typography variant="button">Login</Typography></Button>
           </Box>
-            <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
+          <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
           <hr className={classes.hr} />
           <Box marginBottom={1} flexGrow="grow">
             <ItemsCarousel items={items} />
