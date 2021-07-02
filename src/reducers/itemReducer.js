@@ -52,7 +52,7 @@ export const getItemsByQuery = (queryParams) => {
       }
     } catch (err) {
       console.log('>>> getItems ERROR:', err);
-      dispatch(actions.setMessage({ error: { search: err } }))
+      // dispatch(actions.setMessage({ error: { search: err } }))
     }
   }
 }

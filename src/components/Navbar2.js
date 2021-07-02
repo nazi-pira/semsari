@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,8 +49,6 @@ export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -59,6 +58,8 @@ export default function Navbar() {
   };
 
   const classes = useStyles();
+  const { isLoggedIn } = useSelector((state) => state.user)
+
   return (
     <AppBar position="static">
       <Container maxWidth="lg">
@@ -68,7 +69,6 @@ export default function Navbar() {
               Semsari
             </Link>
           </Typography>
-          <button type="button" onClick={() => setIsLoggedIn(!isLoggedIn)}>{`${isLoggedIn}`}</button>
           <Button className={classes.sectionDesktop} component={RouterLink} variant="outlined" color="inherit" to={isLoggedIn ? '/item/add' : '/signup'}><Typography variant="button">Add Item</Typography></Button>
           {!isLoggedIn ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button> : <span />}
           {!isLoggedIn ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button> : <span />}

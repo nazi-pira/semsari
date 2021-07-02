@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -22,8 +21,6 @@ import Footer from './components/Footer'
 import customTheme from './theme';
 
 export default function App() {
-  const { isLoggedIn } = useSelector((state) => state.user)
-
   return (
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
