@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
+import * as moment from 'moment';
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,9 +20,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { Link as RouterLink } from 'react-router-dom';
+import noImage from '../../assets/no-image.jpg'
 
-import * as moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +81,7 @@ export default function ItemCard(params) {
 
   const { item } = params
   const acronym = item.user.name[0].toUpperCase()
+  const primaryImage = item.images && item.images.length > 0 ? item.images[0] : noImage
 
   const HtmlTooltip = withStyles((theme) => ({
     tooltip: {
@@ -113,7 +117,7 @@ export default function ItemCard(params) {
         subheader={moment(item.created, 'YYYYMMDD').fromNow()} />
       <CardMedia
         className={classes.media}
-        image={item.images[0]}
+        image={primaryImage}
         title={item.title} />
       <CardContent className={classes.cardContent}>
         <Typography variant="body2" color="textSecondary" component="p">

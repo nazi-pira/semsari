@@ -47,9 +47,10 @@ export const loginUser = (email, password) => {
           headers: { 'Content-Type': 'application/json' }
         })
       if (response.status === 200) {
-        const user = await response.json()
+        const { user } = await response.json()
         dispatch(actions.setUser(user))
         dispatch(actions.setIsLoggedIn(true))
+        window.sessionStorage.setItem('token', user.token)
         dispatch(actions.setMessage({ success: { login: 'You are logged in!' } }))
       } else {
         const { message } = await response.json()
@@ -88,8 +89,8 @@ export const registerUser = (name, lastname, phone, city, email, password) => {
 export const logoutUser = () => {
   return async (dispatch) => {
     dispatch(actions.setUser(null))
-    dispatch(actions.setUser(null))
-    dispatch(actions.setMessage({ success: { register: 'Successfully logged out!' } }))
+    dispatch(actions.setIsLoggedIn(false))
+    window.sessionStorage.clear()
   }
 }
 export default userSlice.reducer

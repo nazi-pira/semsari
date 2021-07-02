@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -14,7 +14,6 @@ import ItemsCarousel from '../components/items/ItemsCarousel'
 
 import backgroundImage from '../assets/heroPic.jpg'
 
-import items from '../data/items.json'
 import { getItemsByQuery } from '../reducers/itemReducer'
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +51,7 @@ const WhiteTextTypography = withStyles({
 
 export default function LandingPage() {
   const classes = useStyles();
+  const { items } = useSelector((state) => state.item)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getItemsByQuery({ sort: 'created', order: 'desc', limit: 20 }))

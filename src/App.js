@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from '@material-ui/styles';
@@ -11,10 +10,9 @@ import SignUpPage from './pages/SignUpPage';
 import ProfilePage from './pages/ProfilePage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import AddItemPage from './pages/AddItemPage';
-import searchItemPage from './pages/searchItemPage';
+import searchItemPage from './pages/SearchPage';
 
 import Navbar from './components/Navbar'
-import Navbar2 from './components/Navbar2'
 
 import Footer from './components/Footer'
 
@@ -25,10 +23,7 @@ export default function App() {
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <Router>
-        <div>
-          <Navbar />
-          <Navbar2 />
-        </div>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/signup" component={SignUpPage} />

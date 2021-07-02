@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import ItemDetail from '../components/items/ItemDetail'
-import items from '../data/items.json'
 import backgroundImage from '../assets/ItemDetailPage.jpg'
+import { getItemById } from '../reducers/itemReducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,13 +32,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ItemDetailPage() {
   const { itemId } = useParams();
-  const item = items.filter((p) => p._id === itemId)[0]
+  const { item } = useSelector((state) => state.item)
+
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(getItemById(itemId))
+  }, [])
 
   const classes = useStyles();
   return (
       <div className={classes.root}>
         <Container component="main" className={classes.container}>
-          <ItemDetail item={item} />
+          {item && <ItemDetail item={item} />}
         </Container>
       </div>
   );

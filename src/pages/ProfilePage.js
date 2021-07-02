@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -9,10 +12,7 @@ import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from 'react-router-dom';
 
 import ItemCard from '../components/items/ItemCard'
-
-import user from '../data/user.json'
-
-import items from '../data/items.json'
+import { getItemsByQuery } from '../reducers/itemReducer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,9 +35,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfilePage() {
-  const userId = '123';
   const classes = useStyles();
+  const { user } = useSelector((state) => state.user)
+  const { items } = useSelector((state) => state.item)
 
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    dispatch(getItemsByQuery({ userId: user._id }))
+  }, [])
   return (
     <Container component="main" className={classes.container}>
       <Box>
@@ -52,14 +57,14 @@ export default function ProfilePage() {
         </Grid>
       </Box>
       <hr className={classes.hr} />
-      <Paper variant="outline" elevation={2} className={classes.items}>
+      <Paper elevation={2} className={classes.items}>
         <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
           My Items
         </Typography>
         <Grid container spacing={1}>
-            {items && items.filter((item) => item.user._id === userId).map((item) => (
-              <Grid item xs={12} sm={6} md={4} lg={3}>
-                <ItemCard key={item._id} item={item} />
+            {items.map((item) => (
+              <Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
+                <ItemCard item={item} />
               </Grid>
             ))}
         </Grid>

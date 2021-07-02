@@ -1,1 +1,1 @@
-export const BACKEND_BASE_URL = 'https://semsari.herokuapp.com'
+export const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL || 'http://localhost:8080'

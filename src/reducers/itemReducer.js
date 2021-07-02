@@ -19,7 +19,10 @@ export const itemSlice = createSlice({
       state.items = action.payload
     },
     setItem: (state, action) => {
-      state.items = action.payload
+      state.item = action.payload
+    },
+    setMessage: (state, action) => {
+      state.messages = action.payload
     },
   },
 
@@ -45,6 +48,7 @@ export const getItemsByQuery = (queryParams) => {
         })
       if (response.status === 200) {
         const items = await response.json()
+        console.log(">>items", items);
         dispatch(actions.setItems(items))
       } else {
         const { message } = await response.json()
@@ -58,6 +62,7 @@ export const getItemsByQuery = (queryParams) => {
 }
 
 export const getItemById = (itemId) => {
+  console.log("ItemID:", itemId);
   return async (dispatch) => {
     try {
       const response = await fetch(`${BACKEND_BASE_URL}/api/item/${itemId}`, {
@@ -66,6 +71,7 @@ export const getItemById = (itemId) => {
       })
       if (response.status === 200) {
         const item = await response.json()
+        console.log(item);
         dispatch(actions.setItem(item))
       } else {
         const { message } = await response.json()
@@ -73,6 +79,31 @@ export const getItemById = (itemId) => {
       }
     } catch (err) {
       console.log('>>> REGISTER ERROR:', err);
+      dispatch(actions.setMessage({ error: { getItem: err } }))
+    }
+  }
+}
+
+export const createItem = ({ title, description, price, user }) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${BACKEND_BASE_URL}/api/item`, {
+        method: 'POST',
+        body: JSON.stringify({ title, description, price }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${user.token}`
+        }
+      })
+      if (response.status === 201) {
+        const newItem = await response.json()
+        dispatch(actions.setItem(newItem))
+      } else {
+        const { message } = await response.json()
+        dispatch(actions.setMessage({ error: { getItem: message } }))
+      }
+    } catch (err) {
+      console.log('>>> createItem ERROR:', err);
       dispatch(actions.setMessage({ error: { getItem: err } }))
     }
   }
