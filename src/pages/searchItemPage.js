@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,8 +8,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
-import ItemSearch from '../components/ItemSearch'
+import ItemSearch from '../components/ItemSearch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,11 +18,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary
   },
   formControl: {
     margin: theme.spacing(1),
@@ -33,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
   },
   slider: {
     width: 300
+  },
+  filter: {
+    height: '100%',
+    marginTop: theme.spacing(0),
+    padding: theme.spacing(6, 6),
+    flexGrow: 1
   }
 }));
 
@@ -54,70 +55,64 @@ export default function SearchItemPage() {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid container spacing={5}>
+        <Grid item xs={8} alignContent="center">
           <ItemSearch />
         </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>
-          <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-filled-label">Category</InputLabel>
-        <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
-          value={item}
-          onChange={handleChange}>
-          <MenuItem value="">
-            <em>All</em>
-          </MenuItem>
-          <MenuItem value={10}>Book</MenuItem>
-          <MenuItem value={20}>Home</MenuItem>
-          <MenuItem value={30}>Clothing</MenuItem>
-        </Select>
-          </FormControl>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>
-          <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-filled-label">City</InputLabel>
-        <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
-          value={item}
-          onChange={handleChange}>
-          <MenuItem value="">
-            <em>All</em>
-          </MenuItem>
-          <MenuItem value={10}>Stockholm</MenuItem>
-          <MenuItem value={20}>Götenberg</MenuItem>
-          <MenuItem value={30}>Malmö</MenuItem>
-        </Select>
-          </FormControl>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>
-          <div className={classes.root}>
-      <Typography id="range-slider" gutterBottom>
-        Price
-      </Typography>
-      <Slider
-        value={value}
-        onChange={handleSlide}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-        getAriaValueText={valuetext} />
-          </div>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>
-          <Button variant="outlined" color="secondary">
-           Search Semsari
-          </Button>
-          </Paper>
-        </Grid>
+        <Box className="filter">
+          <Grid item xs={6} sm={3}>
+            <FormControl variant="filled" className={classes.formControl}>
+          <InputLabel id="demo-simple-select-filled-label">Category</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={item}
+            onChange={handleChange}>
+            <MenuItem value="">
+              <em>All</em>
+            </MenuItem>
+            <MenuItem value={10}>Book</MenuItem>
+            <MenuItem value={20}>Home</MenuItem>
+            <MenuItem value={30}>Clothing</MenuItem>
+          </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <FormControl variant="filled" className={classes.formControl}>
+          <InputLabel id="demo-simple-select-filled-label">City</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={item}
+            onChange={handleChange}>
+            <MenuItem value="">
+              <em>All</em>
+            </MenuItem>
+            <MenuItem value={10}>Stockholm</MenuItem>
+            <MenuItem value={20}>Götenberg</MenuItem>
+            <MenuItem value={30}>Malmö</MenuItem>
+          </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <div className={classes.root}>
+        <Typography id="range-slider" gutterBottom>
+          Price
+        </Typography>
+        <Slider
+          value={value}
+          onChange={handleSlide}
+          valueLabelDisplay="auto"
+          aria-labelledby="range-slider"
+          getAriaValueText={valuetext} />
+            </div>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Button variant="outlined" color="secondary">
+            Search Semsari
+            </Button>
+          </Grid>
+        </Box>
       </Grid>
     </div>
   );

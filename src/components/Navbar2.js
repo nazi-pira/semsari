@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -28,13 +29,26 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     display: 'none'
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex'
+    }
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
   }
 }));
 
 export default function Navbar() {
-  const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,11 +68,12 @@ export default function Navbar() {
               Semsari
             </Link>
           </Typography>
-          <Button component={RouterLink} variant="outlined" color="inherit" to="/item/add"><Typography variant="button">Add Item</Typography></Button>
-          <Button component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button>
-          <Button component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button>
-            {auth && (
-              <div>
+          <button type="button" onClick={() => setIsLoggedIn(!isLoggedIn)}>{`${isLoggedIn}`}</button>
+          <Button className={classes.sectionDesktop} component={RouterLink} variant="outlined" color="inherit" to={isLoggedIn ? '/item/add' : '/signup'}><Typography variant="button">Add Item</Typography></Button>
+          {!isLoggedIn ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button> : <span />}
+          {!isLoggedIn ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button> : <span />}
+          {isLoggedIn
+            ? <div>
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
@@ -86,7 +101,6 @@ export default function Navbar() {
                       Profile
                     </Link>
                   </MenuItem>
-
                   <MenuItem onClick={handleClose}>
                     <Link className={classes.link} component={RouterLink} color="inherit" to="/logout">
                       Logout
@@ -94,7 +108,23 @@ export default function Navbar() {
                   </MenuItem>
                 </Menu>
               </div>
-            )}
+            : <span />}
+
+          <MenuIcon
+            className={classes.sectionMobile}
+            onClick={handleMenu}
+            open={open}
+            onClose={handleClose}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }} />
         </Toolbar>
       </Container>
     </AppBar>

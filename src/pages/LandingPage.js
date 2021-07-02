@@ -57,7 +57,7 @@ export default function LandingPage() {
         <Box textAlign="center">
           <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
               <ItemSearch />
-              <Button component={RouterLink} color="inherit" to="/searchItemPage"><Typography variant="button">Login</Typography></Button>
+              <Button component={RouterLink} color="primary" to="/searchItemPage"><Typography variant="button">search</Typography></Button>
           </Box>
             <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
           <hr className={classes.hr} />
