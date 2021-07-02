@@ -38,7 +38,7 @@ export default function ItemDetailPage() {
 
   React.useEffect(() => {
     dispatch(getItemById(itemId))
-  }, [])
+  }, [dispatch, itemId])
 
   const classes = useStyles();
   return (

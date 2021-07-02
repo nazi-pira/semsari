@@ -42,7 +42,7 @@ export default function ProfilePage() {
   const dispatch = useDispatch()
   React.useEffect(() => {
     dispatch(getItemsByQuery({ userId: user._id }))
-  }, [])
+  }, [dispatch, user._id])
   return (
     <Container component="main" className={classes.container}>
       <Box>

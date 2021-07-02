@@ -55,14 +55,13 @@ export const getItemsByQuery = (queryParams) => {
         dispatch(actions.setMessage({ error: { search: message } }))
       }
     } catch (err) {
-      console.log('>>> getItems ERROR:', err);
+      console.log('>>> getItemsByQuery ERROR:', err);
       // dispatch(actions.setMessage({ error: { search: err } }))
     }
   }
 }
 
 export const getItemById = (itemId) => {
-  console.log("ItemID:", itemId);
   return async (dispatch) => {
     try {
       const response = await fetch(`${BACKEND_BASE_URL}/api/item/${itemId}`, {
@@ -78,7 +77,7 @@ export const getItemById = (itemId) => {
         dispatch(actions.setMessage({ error: { getItem: message } }))
       }
     } catch (err) {
-      console.log('>>> REGISTER ERROR:', err);
+      console.log('>>> getItemById ERROR:', err);
       dispatch(actions.setMessage({ error: { getItem: err } }))
     }
   }
