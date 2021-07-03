@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import LoginForm from '../components/member/LoginForm'
+import LoginForm from '../components/forms/LoginForm'
 import backgroundImage from '../assets/AddItemImg.jpg'
 
 const useStyles = makeStyles((theme) => ({

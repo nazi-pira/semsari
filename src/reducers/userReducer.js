@@ -1,12 +1,10 @@
-/* eslint-disable comma-dangle */
-import fetch from 'node-fetch';
 import { createSlice } from '@reduxjs/toolkit';
 import { BACKEND_BASE_URL } from '../config/config'
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    user: {},
+    user: null,
     status: '',
     messages: {
       error: {},
@@ -15,27 +13,21 @@ export const userSlice = createSlice({
     isLoggedIn: false
   },
   reducers: {
-    setErrorMessage: (state, action) => {
-      state.messages.error = action.payload
-    },
-    setIsLoggedIn: (state, action) => {
-      state.isLoggedIn = action.payload
-    },
     setMessage: (state, action) => {
       state.messages = action.payload
-    },
-    setSuccessMessage: (state, action) => {
-      state.messages.success = action.payload
     },
     setUser: (state, action) => {
       state.isLoggedIn = true
       state.user = action.payload
+    },
+    resetUser: (state) => {
+      state.isLoggedIn = false
+      state.user = null
     }
-  },
-
+  }
 });
 
-export const { actions } = userSlice
+export const { setMessage, setUser, resetUser } = userSlice.actions
 
 export const loginUser = (email, password) => {
   return async (dispatch) => {
@@ -48,17 +40,16 @@ export const loginUser = (email, password) => {
         })
       if (response.status === 200) {
         const { user } = await response.json()
-        dispatch(actions.setUser(user))
-        dispatch(actions.setIsLoggedIn(true))
+        dispatch(setUser(user))
         window.sessionStorage.setItem('token', user.token)
-        dispatch(actions.setMessage({ success: { login: 'You are logged in!' } }))
+        dispatch(setMessage({ success: { login: 'You are logged in!' } }))
       } else {
         const { message } = await response.json()
-        dispatch(actions.setMessage({ error: { login: message } }))
+        dispatch(setMessage({ error: { login: message } }))
       }
     } catch (err) {
-      console.log('>>> LOGIN ERROR:', err);
-      dispatch(actions.setMessage({ error: { login: 'Failed to login.' } }))
+      console.log('loginUser ERROR:', err.toString());
+      dispatch(setMessage({ error: { login: err.toString() } }))
     }
   }
 }
@@ -73,23 +64,60 @@ export const registerUser = (name, lastname, phone, city, email, password) => {
       })
       if (response.status === 203) {
         const user = await response.json()
-        dispatch(actions.setUser(user))
-        dispatch(actions.setMessage({ success: { register: 'Succesfully registered!' } }))
+        window.sessionStorage.setItem('token', user.token)
+        dispatch(setUser(user))
+        dispatch(setMessage({ success: { register: 'Succesfully registered!' } }))
       } else {
         const { message } = await response.json()
-        dispatch(actions.setMessage({ error: { register: message } }))
+        dispatch(setMessage({ error: { register: message } }))
       }
     } catch (err) {
-      console.log('>>> REGISTER ERROR:', err);
-      dispatch(actions.setMessage({ error: { register: 'Failed to register' } }))
+      console.log('registerUser ERROR:', err.toString());
+      dispatch(setMessage({ error: { register: err.toString() } }))
     }
   }
 }
 
+export const authUser = () => {
+  return async (dispatch) => {
+    const token = window.sessionStorage.getItem('token')
+    if (!token) {
+      // redirect to login
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_BASE_URL}/api/user/current`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
+          }
+        })
+      if (response.status === 200) {
+        const { user } = await response.json()
+        // Success
+        window.sessionStorage.setItem('token', user.token)
+        dispatch(setUser(user))
+        dispatch(setMessage({ success: { auth: 'Authenticated.' } }))
+      }
+      if (response.status === 401) {
+        dispatch(resetUser())
+        dispatch(setMessage({ error: { auth: 'User not authenticated!' } }))
+        // redirect to login
+      }
+    } catch (err) {
+      console.log("authUser - ERROR:", err.toString())
+      dispatch(setMessage({ error: { auth: err.toString() } }))
+      console.log('dada');
+    }
+  }
+}
+
+
 export const logoutUser = () => {
   return async (dispatch) => {
-    dispatch(actions.setUser(null))
-    dispatch(actions.setIsLoggedIn(false))
+    dispatch(resetUser())
     window.sessionStorage.clear()
   }
 }

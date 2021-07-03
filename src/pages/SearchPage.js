@@ -10,7 +10,7 @@ import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
-import ItemSearch from '../components/ItemSearch';
+import ItemSearch from '../components/items/ItemSearch';
 
 const useStyles = makeStyles((theme) => ({
   root: {

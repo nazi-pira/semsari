@@ -22,7 +22,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import noImage from '../../assets/no-image.jpg'
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,

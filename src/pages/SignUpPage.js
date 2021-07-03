@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
-import SignUpForm from '../components/member/SignUpForm'
+import SignUpForm from '../components/forms/SignUpForm'
 import backgroundImage from '../assets/signupimg.jpg'
 
 const useStyles = makeStyles((theme) => ({

@@ -55,7 +55,7 @@ export const getItemsByQuery = (queryParams) => {
         dispatch(actions.setMessage({ error: { search: message } }))
       }
     } catch (err) {
-      console.log('>>> getItemsByQuery ERROR:', err);
+      console.log('>>> getItemsByQuery ERROR:', err.toString());
       // dispatch(actions.setMessage({ error: { search: err } }))
     }
   }
@@ -78,6 +78,7 @@ export const getItemById = (itemId) => {
       }
     } catch (err) {
       console.log('>>> getItemById ERROR:', err);
+      
       dispatch(actions.setMessage({ error: { getItem: err } }))
     }
   }
@@ -103,7 +104,7 @@ export const createItem = ({ title, description, price, user }) => {
       }
     } catch (err) {
       console.log('>>> createItem ERROR:', err);
-      dispatch(actions.setMessage({ error: { getItem: err } }))
+      dispatch(actions.setMessage({ error: { getItem: err.toString() } }))
     }
   }
 }

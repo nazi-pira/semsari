@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginForm() {
-  const classes = useStyles();
   const dispatch = useDispatch();
+
   const { messages } = useSelector((state) => state.user)
 
   const [email, setEmail] = React.useState('')
@@ -52,6 +52,8 @@ export default function LoginForm() {
   const handleSubmit = () => {
     dispatch(loginUser({ email, password }))
   }
+
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Avatar className={classes.avatar}>

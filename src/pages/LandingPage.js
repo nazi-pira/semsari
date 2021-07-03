@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import { Button } from '@material-ui/core';
-import ItemSearch from '../components/ItemSearch'
+import ItemSearch from '../components/items/ItemSearch'
 import ItemsCarousel from '../components/items/ItemsCarousel'
 
 import backgroundImage from '../assets/heroPic.jpg'
