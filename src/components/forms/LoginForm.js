@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useHistory } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -17,7 +17,8 @@ import Alert from '@material-ui/lab/Alert';
 
 import { ValidatorForm } from 'react-material-ui-form-validator';
 
-import { loginUser } from '../../reducers/userReducer'
+import { userService } from '../../reducers/user.reducer'
+// import { useAuth } from '../auth/PrivateRoute'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,8 +51,18 @@ export default function LoginForm() {
   const [password, setPassword] = React.useState('')
 
   const handleSubmit = () => {
-    dispatch(loginUser({ email, password }))
+    dispatch(userService.login({ email, password }))
   }
+
+  // const history = useHistory();
+  // const location = useLocation();
+  // const auth = useAuth();
+  // const { from } = location.state || { from: { pathname: '/' } };
+  // const login = () => {
+  //   auth.login(() => {
+  //     history.replace(from);
+  //   });
+  // };
 
   const classes = useStyles();
   return (

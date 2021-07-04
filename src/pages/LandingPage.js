@@ -14,7 +14,7 @@ import ItemsCarousel from '../components/items/ItemsCarousel'
 
 import backgroundImage from '../assets/heroPic.jpg'
 
-import { getItemsByQuery } from '../reducers/itemReducer'
+import { getItemsByQuery } from '../reducers/item.reducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {

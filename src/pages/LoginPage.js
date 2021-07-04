@@ -1,10 +1,13 @@
 import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import LoginForm from '../components/forms/LoginForm'
 import backgroundImage from '../assets/AddItemImg.jpg'
+
+import { useAuth } from '../components/auth/PrivateRoute'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Container component="main" maxWidth="xs" className={classes.container}>

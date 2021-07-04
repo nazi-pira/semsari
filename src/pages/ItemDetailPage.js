@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import ItemDetail from '../components/items/ItemDetail'
 import backgroundImage from '../assets/ItemDetailPage.jpg'
-import { getItemById } from '../reducers/itemReducer'
+import { getItemById } from '../reducers/item.reducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {

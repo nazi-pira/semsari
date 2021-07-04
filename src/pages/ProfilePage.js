@@ -12,7 +12,8 @@ import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from 'react-router-dom';
 
 import ItemCard from '../components/items/ItemCard'
-import { getItemsByQuery } from '../reducers/itemReducer'
+import { getItemsByQuery } from '../reducers/item.reducer'
+import { userService } from '../reducers/user.reducer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -39,10 +40,16 @@ export default function ProfilePage() {
   const { user } = useSelector((state) => state.user)
   const { items } = useSelector((state) => state.item)
 
-  const dispatch = useDispatch()
-  React.useEffect(() => {
-    dispatch(getItemsByQuery({ userId: user._id }))
-  }, [dispatch, user._id])
+  // const { isAuthenticated } = useSelector((state) => state.userdata)
+  // const dispatch = useDispatch()
+
+  // React.useEffect(() => {
+  //   dispatch(authUser())
+  //   if (user._id) {
+  //     dispatch(getItemsByQuery({ userId: user._id }))
+  //   }
+  // }, [dispatch, user._id])
+  console.log("ProfilePage - user:", user);
   return (
     <Container component="main" className={classes.container}>
       <Box>

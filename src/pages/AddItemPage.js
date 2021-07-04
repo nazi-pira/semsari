@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import UploadButton from '../components/buttons/UploadButton';
 import backgroundImage from '../assets/AddItemImg.jpg';
 
-import { createItem } from '../reducers/itemReducer';
+import { createItem } from '../reducers/item.reducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {

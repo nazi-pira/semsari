@@ -18,7 +18,7 @@ import Alert from '@material-ui/lab/Alert';
 
 import { ValidatorForm } from 'react-material-ui-form-validator';
 
-import { registerUser } from '../../reducers/userReducer'
+import { userService } from '../../reducers/user.reducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +57,7 @@ export default function SignUpForm() {
     if (password !== confirmPassword) {
       setPwdMismatchMsg('Confirm password does not match password')
     } else {
-      dispatch(registerUser(name, lastname, phone, city, email, password))
+      dispatch(userService.register(name, lastname, phone, city, email, password))
       history.push('/profile')
     }
   }

@@ -2,6 +2,7 @@
 import fetch from 'node-fetch';
 import { createSlice } from '@reduxjs/toolkit';
 import { BACKEND_BASE_URL } from '../config/config'
+import { authHeader, parseQuery } from '../helpers/request'
 
 export const itemSlice = createSlice({
   name: 'item',
@@ -30,25 +31,17 @@ export const itemSlice = createSlice({
 
 export const { actions } = itemSlice
 
-const addSearchQuery = (params) => {
-  const uri = new URL('http://www')
-  Object.keys(params).forEach((key) => {
-    uri.searchParams.set(key, params[key]);
-  })
-  return uri.search
-}
-
 export const getItemsByQuery = (queryParams) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${BACKEND_BASE_URL}/api/item/${addSearchQuery(queryParams)}`,
+      const response = await fetch(`${BACKEND_BASE_URL}/api/item/${parseQuery(queryParams)}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
       if (response.status === 200) {
         const items = await response.json()
-        console.log(">>items", items);
+        console.log('>>items', items);
         dispatch(actions.setItems(items))
       } else {
         const { message } = await response.json()
@@ -78,7 +71,6 @@ export const getItemById = (itemId) => {
       }
     } catch (err) {
       console.log('>>> getItemById ERROR:', err);
-      
       dispatch(actions.setMessage({ error: { getItem: err } }))
     }
   }
@@ -90,10 +82,7 @@ export const createItem = ({ title, description, price, user }) => {
       const response = await fetch(`${BACKEND_BASE_URL}/api/item`, {
         method: 'POST',
         body: JSON.stringify({ title, description, price }),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Token ${user.token}`
-        }
+        headers: authHeader()
       })
       if (response.status === 201) {
         const newItem = await response.json()
