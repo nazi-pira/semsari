@@ -12,6 +12,8 @@ import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from 'react-router-dom';
 
 import ItemCard from '../components/items/ItemCard'
+import { getMyItems } from '../reducers/item.reducer'
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -36,7 +38,13 @@ const useStyles = makeStyles((theme) => ({
 export default function ProfilePage() {
   const classes = useStyles();
   const { user } = useSelector((state) => state.user)
-  const { items } = useSelector((state) => state.item)
+  const { myItems } = useSelector((state) => state.item)
+
+  const dispatch = useDispatch()
+  React.useEffect(() => {
+    dispatch(getMyItems({ userId: user._id }))
+  }, [dispatch, user._id])
+
   return (
     <Container component="main" className={classes.container}>
       <Box>
@@ -56,7 +64,7 @@ export default function ProfilePage() {
           My Items
         </Typography>
         <Grid container spacing={1}>
-            {items.map((item) => (
+            {myItems.map((item) => (
               <Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
                 <ItemCard item={item} />
               </Grid>

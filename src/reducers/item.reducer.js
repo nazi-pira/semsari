@@ -9,11 +9,15 @@ export const itemSlice = createSlice({
   name: 'item',
   initialState: {
     items: [],
-    item: null
+    item: null,
+    myItems: []
   },
   reducers: {
     setItems: (state, action) => {
       state.items = action.payload
+    },
+    setMyItems: (state, action) => {
+      state.myItems = action.payload
     },
     setItem: (state, action) => {
       state.item = action.payload
@@ -45,6 +49,28 @@ export const getItemsByQuery = (queryParams) => {
   }
 }
 
+export const getMyItems = (queryParams) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${BACKEND_BASE_URL}/api/item/${parseQuery(queryParams)}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        })
+      if (response.status === 200) {
+        const items = await response.json()
+        dispatch(actions.setMyItems(items))
+      } else {
+        const { message } = await response.json()
+        dispatch(alertActions.error(message))
+      }
+    } catch (err) {
+      dispatch(alertActions.error(err.toString()))
+    }
+  }
+}
+
+
 export const getItemById = (itemId) => {
   return async (dispatch) => {
     try {
@@ -75,6 +101,7 @@ export const createItem = ({ title, description, price }) => {
       if (response.ok) {
         const newItem = await response.json()
         dispatch(actions.setItem(newItem))
+        dispatch(alertActions.success(`${title} created!`))
       } else {
         dispatch(alertActions.error('Failed to create item!'))
       }

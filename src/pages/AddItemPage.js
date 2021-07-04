@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 import React from 'react';
 
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ValidatorForm } from 'react-material-ui-form-validator';
@@ -51,6 +52,8 @@ export default function AddItemPage() {
   const uploadedImage = undefined // '/images/uploads/bike1.jpg'
 
   const { user } = useSelector((state) => state.user)
+  const alert = useSelector((state) => state.alert)
+
   const [title, setTitle] = React.useState(null)
   const [description, setDescription] = React.useState(null)
   const [price, setPrice] = React.useState(null)
@@ -58,6 +61,13 @@ export default function AddItemPage() {
   const handleSubmit = () => {
     dispatch(createItem({ title, description, price, user }))
   }
+  const history = useHistory()
+
+  React.useEffect(() => {
+    if (alert?.type === 'success') {
+      history.push('/profile')
+    }
+  }, [alert?.type, history])
 
   return (
     <div className={classes.root}>
