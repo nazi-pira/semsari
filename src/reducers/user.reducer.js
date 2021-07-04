@@ -2,33 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import { BACKEND_BASE_URL } from '../config/config';
 import { authHeader } from '../helpers/request';
 
+import { alertActions } from './alert.reducer'
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: null,
-    status: '',
-    messages: {
-      error: {},
-      success: {}
-    },
-    isLoggedIn: false
+    isAuthenticated: false
   },
   reducers: {
-    setMessage: (state, action) => {
-      state.messages = action.payload
-    },
     setUser: (state, action) => {
-      state.isLoggedIn = true
+      state.isAuthenticated = true
       state.user = action.payload
     },
     resetUser: (state) => {
-      state.isLoggedIn = false
+      state.isAuthenticated = false
       state.user = null
     }
   }
 });
 
-const { setMessage, setUser, resetUser } = userSlice.actions
+export const userActions = userSlice.actions
 
 export const userService = {
   login(email, password) {
@@ -37,26 +31,28 @@ export const userService = {
         const response = await fetch(`${BACKEND_BASE_URL}/api/user/login`,
           {
             method: 'POST',
-            body: JSON.stringify(email, password),
+            body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' }
           })
         if (response.status === 200) {
           const { user } = await response.json()
-          dispatch(setUser(user))
-          window.sessionStorage.setItem('user', JSON.stringify(user))
-          dispatch(setMessage({ success: { login: 'You are logged in!' } }))
+          dispatch(userActions.setUser(user))
+          sessionStorage.setItem('user', JSON.stringify(user))
+          dispatch(alertActions.success('You are signed in!'));
         } else {
           const { message } = await response.json()
-          dispatch(setMessage({ error: { login: message } }))
+          dispatch(alertActions.error(message))
+          dispatch(userService.logout())
         }
       } catch (err) {
         console.log('loginUser ERROR:', err.toString());
-        dispatch(setMessage({ error: { login: err.toString() } }))
+        dispatch(userService.logout())
+        dispatch(alertActions.error(err.toString()))
       }
     }
   },
 
-  register(name, lastname, phone, city, email, password) {
+  register({ name, lastname, phone, city, email, password }) {
     return async (dispatch) => {
       try {
         const response = await fetch(`${BACKEND_BASE_URL}/api/user/register`, {
@@ -64,53 +60,55 @@ export const userService = {
           body: JSON.stringify({ name, lastname, phone, city, email, password }),
           headers: { 'Content-Type': 'application/json' }
         })
-        if (response.status === 203) {
-          const user = await response.json()
-          window.sessionStorage.setItem('user', JSON.stringify(user))
-          dispatch(setUser(user))
-          dispatch(setMessage({ success: { register: 'Succesfully registered!' } }))
+        const json = await response.json()
+
+        if (response.ok) {
+          sessionStorage.setItem('user', JSON.stringify(json.user))
+          dispatch(userActions.setUser(json.user))
+          dispatch(alertActions.success('Succesfully registered!'))
         } else {
-          const { message } = await response.json()
-          dispatch(setMessage({ error: { register: message } }))
+          dispatch(alertActions.error(json.message))
         }
       } catch (err) {
-        console.log('registerUser ERROR:', err.toString());
-        dispatch(setMessage({ error: { register: err.toString() } }))
+        dispatch(alertActions.error(err.toString()))
       }
     }
   },
 
-  auth() {
-    return async (dispatch) => {
-      try {
-        const response = await fetch(`${BACKEND_BASE_URL}/api/user/current`,
-          {
-            method: 'GET',
-            headers: authHeader()
-          })
-        if (response.status === 200) {
-          const { user } = await response.json()
-          // Success
-          window.sessionStorage.setItem('user', JSON.stringify(user))
-          dispatch(setUser(user))
-          dispatch(setMessage({ success: { auth: 'Authenticated.' } }))
+  authenticate() {
+    const session = JSON.parse(sessionStorage.getItem('user'));
+
+    if (session?.token) {
+      return async (dispatch) => {
+        try {
+          const response = await fetch(`${BACKEND_BASE_URL}/api/user/auth`,
+            {
+              method: 'GET',
+              headers: authHeader()
+            })
+          if (response.status === 200) {
+            const json = await response.json()
+            sessionStorage.setItem('user', JSON.stringify(json.user))
+            dispatch(userActions.setUser(json.user))
+          }
+          if (response.status === 401) {
+            dispatch(userActions.resetUser())
+          }
+        } catch (err) {
+          dispatch(alertActions.error(err.toString()))
         }
-        if (response.status === 401) {
-          dispatch(resetUser())
-          dispatch(setMessage({ error: { auth: 'User not authenticated!' } }))
-          // redirect to login
-        }
-      } catch (err) {
-        console.log('authUser - ERROR:', err.toString())
-        dispatch(setMessage({ error: { auth: err.toString() } }))
-        console.log('dada');
+      }
+    } else {
+      // Not authenticated so logout user
+      return async () => {
+        userService.logout()
       }
     }
   },
   logout() {
     return async (dispatch) => {
-      dispatch(resetUser())
-      window.sessionStorage.clear()
+      dispatch(userActions.resetUser())
+      sessionStorage.clear()
     }
   }
 }

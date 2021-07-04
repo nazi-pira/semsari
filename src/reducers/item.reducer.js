@@ -1,19 +1,15 @@
-/* eslint-disable comma-dangle */
 import fetch from 'node-fetch';
 import { createSlice } from '@reduxjs/toolkit';
 import { BACKEND_BASE_URL } from '../config/config'
 import { authHeader, parseQuery } from '../helpers/request'
 
+import { alertActions } from './alert.reducer'
+
 export const itemSlice = createSlice({
   name: 'item',
   initialState: {
-    status: '',
     items: [],
-    item: null,
-    messages: {
-      error: {},
-      success: {}
-    },
+    item: null
   },
   reducers: {
     setItems: (state, action) => {
@@ -21,11 +17,8 @@ export const itemSlice = createSlice({
     },
     setItem: (state, action) => {
       state.item = action.payload
-    },
-    setMessage: (state, action) => {
-      state.messages = action.payload
-    },
-  },
+    }
+  }
 
 });
 
@@ -41,15 +34,13 @@ export const getItemsByQuery = (queryParams) => {
         })
       if (response.status === 200) {
         const items = await response.json()
-        console.log('>>items', items);
         dispatch(actions.setItems(items))
       } else {
         const { message } = await response.json()
-        dispatch(actions.setMessage({ error: { search: message } }))
+        dispatch(alertActions.error(message))
       }
     } catch (err) {
-      console.log('>>> getItemsByQuery ERROR:', err.toString());
-      // dispatch(actions.setMessage({ error: { search: err } }))
+      dispatch(alertActions.error(err.toString()))
     }
   }
 }
@@ -61,22 +52,19 @@ export const getItemById = (itemId) => {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       })
-      if (response.status === 200) {
+      if (response.ok) {
         const item = await response.json()
-        console.log(item);
         dispatch(actions.setItem(item))
       } else {
-        const { message } = await response.json()
-        dispatch(actions.setMessage({ error: { getItem: message } }))
+        dispatch(alertActions.error('Failed to get item!'))
       }
     } catch (err) {
-      console.log('>>> getItemById ERROR:', err);
-      dispatch(actions.setMessage({ error: { getItem: err } }))
+      dispatch(alertActions.error('Failed to get item!'))
     }
   }
 }
 
-export const createItem = ({ title, description, price, user }) => {
+export const createItem = ({ title, description, price }) => {
   return async (dispatch) => {
     try {
       const response = await fetch(`${BACKEND_BASE_URL}/api/item`, {
@@ -84,16 +72,14 @@ export const createItem = ({ title, description, price, user }) => {
         body: JSON.stringify({ title, description, price }),
         headers: authHeader()
       })
-      if (response.status === 201) {
+      if (response.ok) {
         const newItem = await response.json()
         dispatch(actions.setItem(newItem))
       } else {
-        const { message } = await response.json()
-        dispatch(actions.setMessage({ error: { getItem: message } }))
+        dispatch(alertActions.error('Failed to create item!'))
       }
     } catch (err) {
-      console.log('>>> createItem ERROR:', err);
-      dispatch(actions.setMessage({ error: { getItem: err.toString() } }))
+      dispatch(alertActions.error('Failed to create item!'))
     }
   }
 }

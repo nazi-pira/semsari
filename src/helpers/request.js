@@ -1,5 +1,5 @@
 export const authHeader = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   if (user && user.token) {
     return {
       'Content-Type': 'application/json',
@@ -16,16 +16,4 @@ export const parseQuery = (queryParams) => {
     uri.searchParams.set(key, queryParams[key]);
   })
   return uri.search
-}
-
-export const handleResponse = async (response) => {
-  if (response.ok) {
-    if (response.status === 401) {
-      // logout
-      console.log('Unauthorized');
-    }
-    return response.json() // await response.json()
-  } else {
-    throw new Error(response.message || response.statusText)
-  }
 }

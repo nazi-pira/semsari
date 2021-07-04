@@ -38,29 +38,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUpForm() {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const { messages } = useSelector((state) => state.user)
+  const alert = useSelector((state) => state.alert)
 
-  const [name, setName] = React.useState('')
-  const [lastname, setLastname] = React.useState('')
-  const [phone, setPhone] = React.useState('')
-  const [city, setCity] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [confirmPassword, setConfirmPassword] = React.useState('')
+  const [name, setName] = React.useState()
+  const [lastname, setLastname] = React.useState()
+  const [phone, setPhone] = React.useState()
+  const [city, setCity] = React.useState()
+  const [email, setEmail] = React.useState()
+  const [password, setPassword] = React.useState()
+  const [confirmPassword, setConfirmPassword] = React.useState()
   const [pwdMismatchMsg, setPwdMismatchMsg] = React.useState(false)
 
   const handleSubmit = () => {
     if (password !== confirmPassword) {
       setPwdMismatchMsg('Confirm password does not match password')
     } else {
-      dispatch(userService.register(name, lastname, phone, city, email, password))
-      history.push('/profile')
+      dispatch(userService.register({ name, lastname, phone, city, email, password }))
     }
   }
+
+  const history = useHistory()
+  React.useEffect(() => {
+    if (alert.type === 'success') {
+      history.push('/profile')
+    }
+  }, [alert.type, history])
+
+  const classes = useStyles();
 
   return (
     <Paper className={classes.root}>
@@ -126,8 +132,8 @@ export default function SignUpForm() {
               id="password"
               name="password"
               label="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              fullWidth />
+              fullWidth
+              onChange={(e) => setPassword(e.target.value)} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -138,8 +144,8 @@ export default function SignUpForm() {
               label="Confirm Password"
               error={pwdMismatchMsg}
               helperText={pwdMismatchMsg || ' '}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              fullWidth />
+              fullWidth
+              onChange={(e) => setConfirmPassword(e.target.value)} />
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
@@ -155,8 +161,7 @@ export default function SignUpForm() {
                 </Button>
           </Grid>
           <Grid item xs={12}>
-            {messages?.error?.register ? <Alert severity="error"> {messages.error.register}</Alert> : <span />}
-            {messages?.success?.register ? <Alert severity="success"> {messages.success.register}</Alert> : <span />}
+            {alert.message ? <Alert severity={alert.type}>{alert.message}</Alert> : <></>}
           </Grid>
         </Grid>
       </ValidatorForm>

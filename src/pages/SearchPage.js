@@ -47,7 +47,7 @@ function valuetext(value) {
 export default function SearchItemPage() {
   const classes = useStyles();
   const [item, setItem] = React.useState('');
-  const [value, setValue] = React.useState([50, 5000]);
+  const [value, setValue] = React.useState([0, 5000]);
 
   const handleChange = (event) => {
     setItem(event.target.value);

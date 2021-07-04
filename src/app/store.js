@@ -1,11 +1,12 @@
 /* eslint-disable comma-dangle */
-import { configureStore, combineReducers, applyMiddleware } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger';
 
-import userReducer from '../reducers/user.reducer';
-import itemReducer from '../reducers/item.reducer';
+import user from '../reducers/user.reducer';
+import item from '../reducers/item.reducer';
+import { alert } from '../reducers/alert.reducer';
 
 const middlewares = [thunkMiddleware]
 
@@ -14,8 +15,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const rootReducer = combineReducers({
-  user: userReducer,
-  item: itemReducer
+  user,
+  item,
+  alert
 })
 
 export const store = configureStore(

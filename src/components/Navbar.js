@@ -17,6 +17,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { useAuth } from './auth/ProvideAuth'
+// import { userService } from '../reducers/user.reducer'
+
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2)
@@ -47,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
-  const { isLoggedIn } = useSelector((state) => state.user)
+  // const { isAuthenticated } = useSelector((state) => state.user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -59,6 +62,10 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
+  const auth = useAuth()
+  if (!auth.isAuthenticated) {
+    auth.authenticate()
+  }
   const classes = useStyles();
   return (
     <AppBar position="static">
@@ -69,10 +76,10 @@ export default function Navbar() {
               Semsari
             </Link>
           </Typography>
-          <Button className={classes.sectionDesktop} component={RouterLink} variant="outlined" color="inherit" to={isLoggedIn ? '/item/add' : '/signup'}><Typography variant="button">Add Item</Typography></Button>
-          {!isLoggedIn ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button> : <span />}
-          {!isLoggedIn ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button> : <span />}
-          {isLoggedIn
+          <Button className={classes.sectionDesktop} component={RouterLink} variant="outlined" color="inherit" to={auth.isAuthenticated ? '/item/add' : '/signup'}><Typography variant="button">Add Item</Typography></Button>
+          {!auth.isAuthenticated ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/signup"><Typography variant="button">Sign Up</Typography></Button> : <span />}
+          {!auth.isAuthenticated ? <Button className={classes.sectionDesktop} component={RouterLink} color="inherit" to="/login"><Typography variant="button">Login</Typography></Button> : <span />}
+          {auth.isAuthenticated
             ? <div>
                 <IconButton
                   aria-label="account of current user"

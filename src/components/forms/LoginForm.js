@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Link as RouterLink, useLocation, useHistory } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -16,9 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 
 import { ValidatorForm } from 'react-material-ui-form-validator';
-
-import { userService } from '../../reducers/user.reducer'
-// import { useAuth } from '../auth/PrivateRoute'
+import { useAuth } from '../auth/ProvideAuth'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,25 +42,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginForm() {
   const dispatch = useDispatch();
+  const auth = useAuth()
 
-  const { messages } = useSelector((state) => state.user)
+  const alert = useSelector((state) => state.alert)
 
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
   const handleSubmit = () => {
-    dispatch(userService.login({ email, password }))
+    dispatch(auth.login(email, password))
   }
 
-  // const history = useHistory();
-  // const location = useLocation();
-  // const auth = useAuth();
-  // const { from } = location.state || { from: { pathname: '/' } };
-  // const login = () => {
-  //   auth.login(() => {
-  //     history.replace(from);
-  //   });
-  // };
+  const history = useHistory()
+  React.useEffect(() => {
+    if (alert.type === 'success') {
+      history.push('/profile')
+    }
+  }, [alert.type, history])
 
   const classes = useStyles();
   return (
@@ -83,7 +79,6 @@ export default function LoginForm() {
           label="Email Address"
           name="email"
           onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
           autoFocus />
         <TextField
           variant="outlined"
@@ -94,8 +89,7 @@ export default function LoginForm() {
           label="Password"
           type="password"
           id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password" />
+          onChange={(e) => setPassword(e.target.value)} />
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me" />
@@ -119,8 +113,9 @@ export default function LoginForm() {
             </Link>
           </Grid>
         </Grid>
-        {messages?.error?.login ? <Alert severity="error"> {messages.error.login}</Alert> : <span />}
-        {messages?.success?.login ? <Alert severity="success"> {messages.success.login}</Alert> : <span />}
+
+        {alert.message ? <Alert severity={alert.type}>{alert.message}</Alert> : <></>}
+
       </ValidatorForm>
     </div>
   );
