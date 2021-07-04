@@ -14,7 +14,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import ItemCard from '../components/items/ItemCard'
 import { getMyItems } from '../reducers/item.reducer'
 
-
 const useStyles = makeStyles((theme) => ({
   container: {
     height: '100%',

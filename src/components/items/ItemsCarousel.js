@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
@@ -7,6 +9,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 import ItemCard from './ItemCard';
+
+import { getCarouselItems } from '../../reducers/item.reducer'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -34,15 +38,22 @@ const responsive = {
   }
 };
 
-export default function ItemsCarousel(props) {
+export default function ItemsCarousel() {
   const classes = useStyles()
-  const { items } = props
+
+  const { carouselItems } = useSelector((state) => state.item)
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(getCarouselItems({ sort: 'created', order: 'desc', limit: 20 }))
+  }, [dispatch])
+
   return (
     <Carousel
       responsive={responsive}
       infinite>
       {
-        items.map((item) => {
+        carouselItems.map((item) => {
           return (
             <div className={classes.card} key={item._id}>
               <ItemCard item={item} />

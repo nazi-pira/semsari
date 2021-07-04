@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -11,11 +14,13 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
 import ItemSearch from '../components/items/ItemSearch';
+import ItemCard from '../components/items/ItemCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     display: 'flex',
+    flexDirection: 'column',
     wrap: 'wrap',
     padding: '20px'
   },
@@ -46,11 +51,12 @@ function valuetext(value) {
 
 export default function SearchItemPage() {
   const classes = useStyles();
-  const [item, setItem] = React.useState('');
+  const [something, setSomething] = React.useState('');
   const [value, setValue] = React.useState([0, 5000]);
+  const { searchResult } = useSelector((state) => state.item)
 
   const handleChange = (event) => {
-    setItem(event.target.value);
+    setSomething(event.target.value);
   };
   const handleSlide = (event, newValue) => {
     setValue(newValue);
@@ -68,7 +74,7 @@ export default function SearchItemPage() {
                 <Select
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
-                  value={item}
+                  value={something}
                   onChange={handleChange}>
                   <MenuItem value=""> <em>All</em></MenuItem>
                   <MenuItem value={10}>Book</MenuItem>
@@ -83,7 +89,7 @@ export default function SearchItemPage() {
                   <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    value={item}
+                    value={something}
                     onChange={handleChange}>
                     <MenuItem value="">
                       <em>All</em>
@@ -114,6 +120,15 @@ export default function SearchItemPage() {
             </Grid>
           </Box>
         </Grid>
+      </Grid>
+      <hr />
+      <Grid container spacing={1} xs={12} justify="center">
+        {searchResult?.map((item) => {
+          return (
+            <Grid item>
+              <ItemCard item={item} />
+            </Grid>)
+        })}
       </Grid>
     </div>
   );

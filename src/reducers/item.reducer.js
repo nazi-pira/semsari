@@ -8,19 +8,27 @@ import { alertActions } from './alert.reducer'
 export const itemSlice = createSlice({
   name: 'item',
   initialState: {
-    items: [],
+    carouselItems: [],
     item: null,
-    myItems: []
+    myItems: [],
+    searchResult: []
+
   },
   reducers: {
     setItems: (state, action) => {
       state.items = action.payload
+    },
+    setCarouselItems: (state, action) => {
+      state.carouselItems = action.payload
     },
     setMyItems: (state, action) => {
       state.myItems = action.payload
     },
     setItem: (state, action) => {
       state.item = action.payload
+    },
+    setSearchResult: (state, action) => {
+      state.searchResult = action.payload
     }
   }
 
@@ -28,7 +36,7 @@ export const itemSlice = createSlice({
 
 export const { actions } = itemSlice
 
-export const getItemsByQuery = (queryParams) => {
+export const getCarouselItems = (queryParams) => {
   return async (dispatch) => {
     try {
       const response = await fetch(`${BACKEND_BASE_URL}/api/item/${parseQuery(queryParams)}`,
@@ -38,7 +46,28 @@ export const getItemsByQuery = (queryParams) => {
         })
       if (response.status === 200) {
         const items = await response.json()
-        dispatch(actions.setItems(items))
+        dispatch(actions.setCarouselItems(items))
+      } else {
+        const { message } = await response.json()
+        dispatch(alertActions.error(message))
+      }
+    } catch (err) {
+      dispatch(alertActions.error(err.toString()))
+    }
+  }
+}
+
+export const getSearchResults = (queryParams) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${BACKEND_BASE_URL}/api/item/${parseQuery(queryParams)}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        })
+      if (response.status === 200) {
+        const items = await response.json()
+        dispatch(actions.setSearchResult(items))
       } else {
         const { message } = await response.json()
         dispatch(alertActions.error(message))

@@ -14,7 +14,7 @@ import ItemsCarousel from '../components/items/ItemsCarousel'
 
 import backgroundImage from '../assets/heroPic.jpg'
 
-import { getItemsByQuery } from '../reducers/item.reducer'
+import { getCarouselItems } from '../reducers/item.reducer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,11 +51,11 @@ const WhiteTextTypography = withStyles({
 
 export default function LandingPage() {
   const classes = useStyles();
-  const { items } = useSelector((state) => state.item)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getItemsByQuery({ sort: 'created', order: 'desc', limit: 20 }))
+    dispatch(getCarouselItems({ sort: 'created', order: 'desc', limit: 20 }))
   }, [dispatch])
+
   return (
     <div className={classes.root}>
       <Container component="main" className={classes.container}>
@@ -67,7 +67,7 @@ export default function LandingPage() {
           <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
           <hr className={classes.hr} />
           <Box marginBottom={1} flexGrow="grow">
-            <ItemsCarousel items={items} />
+            <ItemsCarousel />
           </Box>
         </Box>
       </Container>
