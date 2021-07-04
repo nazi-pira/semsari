@@ -7,8 +7,6 @@ import Container from '@material-ui/core/Container';
 import LoginForm from '../components/forms/LoginForm'
 import backgroundImage from '../assets/AddItemImg.jpg'
 
-import { useAuth } from '../components/auth/PrivateRoute'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundImage: `url(${backgroundImage})`,
