@@ -1,3 +1,5 @@
+import { BACKEND_BASE_URL } from '../config/config' 
+
 export const authHeader = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
   if (user && user.token) {
@@ -16,4 +18,8 @@ export const parseQuery = (queryParams) => {
     uri.searchParams.set(key, queryParams[key]);
   })
   return uri.search
+}
+
+export const getImageUrl = (filename) => {
+  return `${BACKEND_BASE_URL}/api/upload/image/${filename}`
 }

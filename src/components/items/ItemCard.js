@@ -21,6 +21,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import noImage from '../../assets/no-image.jpg'
 
+import { getImageUrl } from '../../helpers/request'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -78,7 +80,7 @@ export default function ItemCard({ item, userId }) {
   const classes = useStyles();
 
   const acronym = item.user.name[0].toUpperCase()
-  const primaryImage = item.images && item.images.length > 0 ? item.images[0] : noImage
+  const itemImage = item?.images.length > 0 ? getImageUrl(item.images[0]) : noImage
 
   const canEdit = item.user._id === userId
 
@@ -92,11 +94,13 @@ export default function ItemCard({ item, userId }) {
     }
   }))(Tooltip);
 
+  const profileImage = item.user.image ? getImageUrl(item.user.image) : null
+
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" src={item.user.image} className={classes.avatar}>
+          <Avatar aria-label="recipe" src={profileImage} className={classes.avatar}>
             {acronym}
           </Avatar>
         }
@@ -114,7 +118,7 @@ export default function ItemCard({ item, userId }) {
         subheader={moment(item.created, 'YYYYMMDD').fromNow()} />
       <CardMedia
         className={classes.media}
-        image={primaryImage}
+        image={itemImage}
         title={item.title} />
       <CardContent className={classes.cardContent}>
         <Typography variant="body2" color="textSecondary" component="p">

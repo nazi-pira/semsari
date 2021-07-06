@@ -9,6 +9,10 @@ import Typography from '@material-ui/core/Typography';
 
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
+import { getImageUrl } from '../../helpers/request'
+
+import noImage from '../../assets/no-image.jpg'
+
 const useStyles = makeStyles(() => ({
   root: {
     display: 'grid',
@@ -18,21 +22,16 @@ const useStyles = makeStyles(() => ({
   image: {
     maxWidth: '100%',
     maxHeight: '100%'
-  },
-  noImage: {
-    width: '100%',
-    height: '100%',
-    minHeight: '300px'
   }
 }));
 
 export default function ItemDetail({ item }) {
   const classes = useStyles();
-
+  const primaryImage = item?.images.length > 0 ? getImageUrl(item.images[0]) : noImage
   return (
     <Box container="true" className={classes.root} bgcolor="primary" display="flex" alignItems="center" justifyContent="center" borderRadius="10px">
       <Box width="100%" height="100%" bgcolor="#fff" display="flex" justifyContent="center" alignItems="center">
-        {item.images.length ? <img alt="upload" src={item.images[0]} className={classes.image} /> : <Avatar variant="square" className={classes.noImage}><CameraAltIcon /><Typography variant="button">Upload</Typography></Avatar>}
+         <img alt="upload" src={primaryImage} className={classes.image} />
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center" height="100%" width="100%" bgcolor="#ffff" p={3}>
         <Box p={1} pt={2} width="100%">
