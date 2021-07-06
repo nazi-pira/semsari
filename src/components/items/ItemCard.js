@@ -75,12 +75,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ItemCard(params) {
+export default function ItemCard({ item, userId }) {
   const classes = useStyles();
 
-  const { item } = params
   const acronym = item.user.name[0].toUpperCase()
   const primaryImage = item.images && item.images.length > 0 ? item.images[0] : noImage
+
+  const canEdit = item.user._id === userId
 
   const HtmlTooltip = withStyles((theme) => ({
     tooltip: {
@@ -101,9 +102,7 @@ export default function ItemCard(params) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          canEdit ? <IconButton aria-label="settings"><MoreVertIcon /></IconButton> : <IconButton style={{ marginRight: 20 }} />
         }
         title={
         <HtmlTooltip

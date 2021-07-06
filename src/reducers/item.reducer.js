@@ -44,11 +44,10 @@ export const getCarouselItems = (queryParams) => {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
+      const { items, message } = await response.json()
       if (response.status === 200) {
-        const items = await response.json()
         dispatch(actions.setCarouselItems(items))
       } else {
-        const { message } = await response.json()
         dispatch(alertActions.error(message))
       }
     } catch (err) {
@@ -65,11 +64,10 @@ export const getSearchResults = (queryParams) => {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
+      const { items, metadata, message } = await response.json()
       if (response.status === 200) {
-        const items = await response.json()
         dispatch(actions.setSearchResult(items))
       } else {
-        const { message } = await response.json()
         dispatch(alertActions.error(message))
       }
     } catch (err) {
@@ -86,11 +84,10 @@ export const getMyItems = (queryParams) => {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
+      const { items, message } = await response.json()
       if (response.status === 200) {
-        const items = await response.json()
         dispatch(actions.setMyItems(items))
       } else {
-        const { message } = await response.json()
         dispatch(alertActions.error(message))
       }
     } catch (err) {
@@ -99,7 +96,6 @@ export const getMyItems = (queryParams) => {
   }
 }
 
-
 export const getItemById = (itemId) => {
   return async (dispatch) => {
     try {
@@ -107,11 +103,12 @@ export const getItemById = (itemId) => {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       })
+      const { item, message } = await response.json()
+      console.log("ITEM:", item);
       if (response.ok) {
-        const item = await response.json()
         dispatch(actions.setItem(item))
       } else {
-        dispatch(alertActions.error('Failed to get item!'))
+        dispatch(alertActions.error(message))
       }
     } catch (err) {
       dispatch(alertActions.error('Failed to get item!'))

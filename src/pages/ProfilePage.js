@@ -65,7 +65,7 @@ export default function ProfilePage() {
         <Grid container spacing={1}>
             {myItems.map((item) => (
               <Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
-                <ItemCard item={item} />
+                <ItemCard item={item} userId={user._id} />
               </Grid>
             ))}
         </Grid>

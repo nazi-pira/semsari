@@ -3,7 +3,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -51,6 +50,7 @@ export default function ItemsCarousel() {
   return (
     <Carousel
       responsive={responsive}
+      removeArrowOnDeviceType={['tablet', 'mobile']}
       infinite>
       {
         carouselItems.map((item) => {

@@ -30,7 +30,7 @@ export default function ItemDetail({ item }) {
   const classes = useStyles();
 
   return (
-    <Box container className={classes.root} bgcolor="primary" display="flex" alignItems="center" justifyContent="center" borderRadius="10px">
+    <Box container="true" className={classes.root} bgcolor="primary" display="flex" alignItems="center" justifyContent="center" borderRadius="10px">
       <Box width="100%" height="100%" bgcolor="#fff" display="flex" justifyContent="center" alignItems="center">
         {item.images.length ? <img alt="upload" src={item.images[0]} className={classes.image} /> : <Avatar variant="square" className={classes.noImage}><CameraAltIcon /><Typography variant="button">Upload</Typography></Avatar>}
       </Box>

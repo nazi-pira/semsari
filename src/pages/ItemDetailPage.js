@@ -44,7 +44,7 @@ export default function ItemDetailPage() {
   return (
       <div className={classes.root}>
         <Container component="main" className={classes.container}>
-          {item && <ItemDetail item={item} />}
+          {item ? <ItemDetail item={item} /> : <></>}
         </Container>
       </div>
   );
