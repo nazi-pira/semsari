@@ -58,18 +58,17 @@ export default function ProfilePage() {
         </Grid>
       </Box>
       <hr className={classes.hr} />
-      <Paper elevation={2} className={classes.items}>
-        <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-          My Items
-        </Typography>
-        <Grid container spacing={1}>
-            {myItems.map((item) => (
-              <Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
-                <ItemCard item={item} userId={user._id} />
-              </Grid>
-            ))}
-        </Grid>
-      </Paper>
+      <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
+        My Items
+      </Typography>
+
+      <Grid container spacing={2} justify="center">
+          {myItems.map((item) => (
+            <Grid item key={item._id} xs={12} sm={6} md={4} lg={3}>
+              <ItemCard item={item} userId={user._id} />
+            </Grid>
+          ))}
+      </Grid>
     </Container>
   );
 }

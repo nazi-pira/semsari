@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -15,10 +15,13 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+import ListItemText from '@material-ui/core/ListItemText';
 
+import MenuIcon from '@material-ui/icons/Menu';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import HomeIcon from '@material-ui/icons/Home';
 import { useAuth } from './auth/ProvideAuth'
-// import { userService } from '../reducers/user.reducer'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -49,12 +52,44 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5'
+  }
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center'
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center'
+    }}
+    {...props} />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    gridTemplateRow: '2fr 1fr',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white
+      }
+    }
+  }
+}))(MenuItem);
+
 export default function Navbar() {
   // const { isAuthenticated } = useSelector((state) => state.user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {
+    console.log("event", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -82,40 +117,33 @@ export default function Navbar() {
           {auth.isAuthenticated
             ? <div>
                 <IconButton
-                  aria-label="account of current user"
+                  aria-label="user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleMenu}
                   color="inherit">
                   <AccountCircle />
                 </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchororigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                  }}
-                  keepmounted="true"
-                  transformorigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                  }}
-                  open={open}
-                  onClose={handleClose}>
-                  <MenuItem onClick={handleClose}>
-                    <Link className={classes.link} component={RouterLink} color="inherit" to="/profile">
-                      Profile
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link className={classes.link} component={RouterLink} color="inherit" to="/logout">
-                      Logout
-                    </Link>
-                  </MenuItem>
-                </Menu>
+                <StyledMenu id="customized-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+                  <Link variant="body2" component={RouterLink} color="inherit" to="/profile">
+                    <StyledMenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <HomeIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary="Profile" />
+                    </StyledMenuItem>
+                  </Link>
+                  <Link variant="body2" component={RouterLink} color="inherit" to="/logout">
+                    <StyledMenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <ExitToAppIcon fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText primary="Logout" />
+                    </StyledMenuItem>
+                  </Link>
+                </StyledMenu>
               </div>
-            : <span />}
+            : <></>}
 
           <MenuIcon
             className={classes.sectionMobile}
