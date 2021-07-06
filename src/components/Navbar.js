@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-
 import { Link as RouterLink } from 'react-router-dom';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -24,19 +22,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import { useAuth } from './auth/ProvideAuth'
 
 const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
   title: {
     flexGrow: 1
-  },
-  link: {
-    '&:link': {
-      textDecoration: 'none'
-    }
-  },
-  input: {
-    display: 'none'
   },
   sectionDesktop: {
     display: 'none',
@@ -84,12 +71,10 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function Navbar() {
-  // const { isAuthenticated } = useSelector((state) => state.user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {
-    console.log("event", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -125,7 +110,7 @@ export default function Navbar() {
                   <AccountCircle />
                 </IconButton>
                 <StyledMenu id="customized-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-                  <Link variant="body2" component={RouterLink} color="inherit" to="/profile">
+                  <Link variant="body2" component={RouterLink} color="inherit" underline="none" to="/profile">
                     <StyledMenuItem onClick={handleClose}>
                       <ListItemIcon>
                         <HomeIcon fontSize="small" />
@@ -133,7 +118,7 @@ export default function Navbar() {
                       <ListItemText primary="Profile" />
                     </StyledMenuItem>
                   </Link>
-                  <Link variant="body2" component={RouterLink} color="inherit" to="/logout">
+                  <Link variant="body2" component={RouterLink} color="inherit" underline="none" to="/logout">
                     <StyledMenuItem onClick={handleClose}>
                       <ListItemIcon>
                         <ExitToAppIcon fontSize="small" />
