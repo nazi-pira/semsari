@@ -125,13 +125,11 @@ export default function ItemCard({ item, userId }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon /> {item.rating}
+        </IconButton>
         <div>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon /> {item.rating}
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          <Typography variant="h6" color="textPrimary"> {item.price} SEK </Typography>
         </div>
         <Button size="small" variant="outlined" color="primary" component={RouterLink} to={`/item/view/${item._id}`}>
             View

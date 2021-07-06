@@ -15,22 +15,18 @@ const useStyles = makeStyles(() => ({
   },
   input: {
     color: 'black',
-    fontFamily: 'Roboto Mono',
-    backgroundColor: '#fff',
-    '&:hover': {
-      backgroundColor: '#fff'
-    }
+    fontFamily: 'Roboto Mono'
   }
 }));
-export default function ItemSearch(queryParams) {
-  const [search, setSearch] = React.useState(false);
+export default function ItemSearch({ query, send }) {
+  const [search, setSearch] = React.useState();
   const dispatch = useDispatch()
 
   const history = useHistory()
-  console.log("query", { ...queryParams, search });
+
   const handleKey = (event) => {
-    if (event.key === 'Enter') {
-      dispatch(getSearchResults({ ...queryParams, search }))
+    if (event.key === 'Enter' || send === true) {
+      dispatch(getSearchResults({ ...query, ...search && { search } }))
       if (history?.location?.pathname !== '/search') {
         history.push('/search')
       }

@@ -15,9 +15,8 @@ import LogoutPage from './pages/LogoutPage';
 // Components
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import { PrivateRoute, useAuth } from './components/auth/ProvideAuth'
+import { PrivateRoute } from './components/auth/ProvideAuth'
 import { alertActions } from './reducers/alert.reducer'
-import { userService } from './reducers/user.reducer'
 
 export default function App() {
   const dispatch = useDispatch()

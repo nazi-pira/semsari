@@ -50,7 +50,7 @@ export default function ItemsCarousel() {
   return (
     <Carousel
       responsive={responsive}
-      removeArrowOnDeviceType={['tablet', 'mobile']}
+      removeArrowOnDeviceType={['mobile']}
       infinite>
       {
         carouselItems.map((item) => {
