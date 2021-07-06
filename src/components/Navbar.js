@@ -92,7 +92,7 @@ export default function Navbar() {
       <Container maxWidth="lg">
         <Toolbar>
           <Typography variant="h3" className={classes.title}>
-            <Link className={classes.link} component={RouterLink} color="inherit" to="/">
+            <Link component={RouterLink} color="inherit" underline="none" to="/">
               Semsari
             </Link>
           </Typography>
