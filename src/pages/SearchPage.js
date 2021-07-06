@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Slider from '@material-ui/core/Slider';
@@ -69,12 +70,16 @@ export default function SearchPage() {
 
   return (
     <div className={classes.root}>
+      <Container className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Grid container spacing={3} justify="center">
-            <Grid item xs={12} sm={10} md={8} lg={7}>
+          <Grid item xs={12} sm={12} md={3} lg={2} />
+            {/* main grid column! */}
+            <Grid item xs={12} sm={10} md={9} lg={10}>
               <ItemSearch query={query} />
             </Grid>
+
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={3} lg={2}>
@@ -109,7 +114,7 @@ export default function SearchPage() {
                   </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={11} sm={7} md={12} lg={12}>
+            <Grid item xs={11} sm={7} md={11} lg={11}>
               <FormControl variant="filled" fullWidth className={classes.formControl}>
                 <Typography id="price-slider" gutterBottom>
                   Price
@@ -150,6 +155,7 @@ export default function SearchPage() {
           </Grid>
         </Grid>
       </Grid>
+      </Container>
     </div>
   );
 }
