@@ -11,8 +11,8 @@ export const itemSlice = createSlice({
     carouselItems: [],
     item: null,
     myItems: [],
-    searchResult: []
-
+    searchResult: [],
+    searchMetaData: null
   },
   reducers: {
     setItems: (state, action) => {
@@ -29,6 +29,9 @@ export const itemSlice = createSlice({
     },
     setSearchResult: (state, action) => {
       state.searchResult = action.payload
+    },
+    setSearchMetaData: (state, action) => {
+      state.searchMetaData = action.payload
     }
   }
 
@@ -66,6 +69,7 @@ export const getSearchResults = (queryParams) => {
         })
       const { items, metadata, message } = await response.json()
       if (response.status === 200) {
+        dispatch(actions.setSearchMetaData(metadata))
         dispatch(actions.setSearchResult(items))
       } else {
         dispatch(alertActions.error(message))
@@ -104,7 +108,6 @@ export const getItemById = (itemId) => {
         headers: { 'Content-Type': 'application/json' }
       })
       const { item, message } = await response.json()
-      console.log("ITEM:", item);
       if (response.ok) {
         dispatch(actions.setItem(item))
       } else {

@@ -45,7 +45,6 @@ export const userService = {
           dispatch(userService.logout())
         }
       } catch (err) {
-        console.log('loginUser ERROR:', err.toString());
         dispatch(userService.logout())
         dispatch(alertActions.error(err.toString()))
       }

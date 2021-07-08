@@ -2,16 +2,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-import CameraAltIcon from '@material-ui/icons/CameraAlt';
-
-import { getImageUrl } from '../../helpers/request'
-
-import noImage from '../../assets/no-image.jpg'
+import { getImageUrl } from '../../helpers/request';
+import noImage from '../../assets/no-image.jpg';
 
 const useStyles = makeStyles(() => ({
   root: {

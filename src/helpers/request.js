@@ -1,4 +1,4 @@
-import { BACKEND_BASE_URL } from '../config/config' 
+import { BACKEND_BASE_URL } from '../config/config';
 
 export const authHeader = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
