@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-import Container from '@material-ui/core/Container'
+import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import ItemSearch from '../components/items/ItemSearch'
 import ItemsCarousel from '../components/items/ItemsCarousel'
@@ -60,6 +61,9 @@ export default function LandingPage() {
         <Box textAlign="center">
           <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
             <ItemSearch />
+            <Button variant="contained" color="secondary">
+              Secondary
+            </Button>
           </Box>
           <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
           <hr className={classes.hr} />
