@@ -62,7 +62,7 @@ export default function LandingPage() {
           <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
             <ItemSearch />
             <Button variant="contained" color="secondary">
-              Secondary
+              Search
             </Button>
           </Box>
           <WhiteTextTypography variant="h4" align="center" color="primary" gutterBottom>Recently added</WhiteTextTypography>
