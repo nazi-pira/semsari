@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
   },
   hr: {
     margin: theme.spacing(2, 0, 2, 0)
+  },
+  searchButton: {
+    margin: theme.spacing(2, 0, 2, 0)
+
   }
 }));
 
@@ -61,7 +65,7 @@ export default function LandingPage() {
         <Box textAlign="center">
           <Box p={{ xs: 0, sm: 3, md: 15 }} height="60vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
             <ItemSearch />
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" className={classes.searchButton}>
               Search
             </Button>
           </Box>
